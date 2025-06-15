@@ -14,8 +14,8 @@ export default function RadioQuestion({ question, field, options, value, onChang
                                     name={field}
                                     id={option.id}
                                     value={option.label}
-                                    checked={value === option.id}  // ★ 是否被選
-                                    onChange={() => onChange(option.id)}
+                                    checked={value === option.id}  // 是否被選
+                                    onChange={() => onChange(option.id)}//當被選取時呼叫 onChange 並傳出選項 id
                                     />
                                 {option.label}
                             </label>

@@ -120,7 +120,8 @@ export default function BookQuiz() {
               label="你有多少時間可以看書？"
               field="book"
               value={answers.book}
-              onChange={handleSliderChange} />
+              onChange={handleSliderChange}
+              sliderClassName="slider-book" />
 
             {radioQuestion.map((question) => (
               <RadioQuestion

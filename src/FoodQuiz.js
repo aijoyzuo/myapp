@@ -118,7 +118,8 @@ export default function FoodQuiz() {
               label="你有多少時間可以用餐？"
               field="food"
               value={answers.food}
-              onChange={handleSliderChange} />
+              onChange={handleSliderChange}
+              sliderClassName="slider-food" />
 
             {radioQuestion.map((question) => (
               <RadioQuestion

@@ -12,9 +12,9 @@
 }
 
 .food-quiz label.option-label:has(input:checked) {
-  background-color: #ecccaa;
+  background-color: #f6da85;
   color: #ffffff;
-  border-color: #EDBF8D;
+  border-color: #f6da85;
 }
 
 
@@ -33,5 +33,27 @@
 .food-quiz input[type="radio"]:checked,
 .food-quiz input[type="checkbox"]:checked {
   appearance: auto;
-  accent-color: #EDBF8D !important;
+  accent-color:#f6da85 !important;
+}
+
+//slider
+input.slider-movie::-webkit-slider-thumb {
+  background-color: #ca4231;
+}
+input.slider-movie::-moz-range-thumb {
+  background-color: #ca4231;
+}
+
+input.slider-book::-webkit-slider-thumb {
+  background-color: #4D606E;
+}
+input.slider-book::-moz-range-thumb {
+  background-color: #4D606E;
+}
+
+input.slider-food::-webkit-slider-thumb {
+  background-color: #f6da85;
+}
+input.slider-food::-moz-range-thumb {
+  background-color: #f6da85;
 }
