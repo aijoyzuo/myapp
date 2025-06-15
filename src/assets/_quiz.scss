@@ -1,1 +1,37 @@
+/* 當 input 被選中時，套用背景色變化 */
+.movie-quiz label.option-label:has(input:checked) {
+  background-color: #e29da2;
+  color: #ffffff;
+  border-color: #ca4231;
+}
 
+.book-quiz label.option-label:has(input:checked) {
+  background-color: #90b4cf;
+  color: #ffffff;
+  border-color: #4D606E;
+}
+
+.food-quiz label.option-label:has(input:checked) {
+  background-color: #ecccaa;
+  color: #ffffff;
+  border-color: #EDBF8D;
+}
+
+
+.movie-quiz input[type="radio"]:checked,
+.movie-quiz input[type="checkbox"]:checked {
+  appearance: auto;
+  accent-color: #ca4231 !important;
+}
+
+.book-quiz input[type="radio"]:checked,
+.book-quiz input[type="checkbox"]:checked {
+  appearance: auto;
+  accent-color: #4D606E !important;
+}
+
+.food-quiz input[type="radio"]:checked,
+.food-quiz input[type="checkbox"]:checked {
+  appearance: auto;
+  accent-color: #EDBF8D !important;
+}

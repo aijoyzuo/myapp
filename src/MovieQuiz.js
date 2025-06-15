@@ -1,117 +1,162 @@
-import { useState } from 'react';
-import QuestionBlock from './component/QuestionBlock';
+import { useState, useMemo } from 'react';
+import SliderQuestion from './component/SliderQuestion';
+import RadioQuestion from './component/RadioQuestion';
+import CheckboxQuestion from './component/CheckboxQuestion';
 
 export default function MovieQuiz() {
-  const [answers, setAnswers] = useState({// 初始問卷答案（5 題）
-    person:'',
-    language: '',
-    afterMovie: '',
-    imdbRating: '',
-    mood: '',
-  });
+	const [answers, setAnswers] = useState({
+		movie: 90,
+		person: '',
+		afterMovie: '',
+		rating: '',
+		language: [],
+		mood: []
+	});
+
+	const handleSliderChange = (field, value) => {
+		setAnswers(a => ({ ...a, [field]: value }));
+
+	};
+
+	const radioQuestion = [
+		{
+			id: "person",
+			field: "person",
+			question: "今日影迷有幾位？",
+			options: [
+				{ id: "single", label: "一人" },
+				{ id: "double", label: "雙人" },
+				{ id: "group", label: "多人" },
+			]
+		},
+		{
+			id: "afterMovie",
+			field: "afterMovie",
+			question: "電影之後的行程？",
+			options: [
+				{ id: "sleep", label: "躺平" },
+				{ id: "dining", label: "用餐" },
+				{ id: "outdoor", label: "戶外活動" },
+			]
+		},
+		{
+			id: "rating",
+			field: "rating",
+			question: "電影評價選擇",
+			options: [
+				{ id: "dontcare", label: "都可以" },
+				{ id: "high", label: "高於六分" },
+			]
+		},
+	]
+	const checkQuestion = [
+		{
+			id: "language",
+			field: "language",
+			question: "語系偏好(複選)",
+			options: [
+				{ id: "western", label: "歐美" },
+				{ id: "Japanese", label: "日文" },
+				{ id: "korean", label: "韓文" },
+				{ id: "mandarin", label: "華文" },
+			]
+		},
+		{
+			id: "mood",
+			field: "mood",
+			question: "今天想要(複選)",
+			options: [
+				{ id: "cry", label: "哭哭啼啼" },
+				{ id: "laugh", label: "放聲大笑" },
+				{ id: "shock", label: "來點驚嚇" },
+			]
+		}
+	]
+
+	const requiredSingles = ['person', 'afterMovie', 'rating']; // radio、文字…單選必填
+	const requiredAtLeastOne = ['language', 'mood'];
+	const isFormComplete = useMemo(() => {
+		const singlesOk = requiredSingles.every(f => answers[f]);
+		const checksOk = requiredAtLeastOne.every(f => answers[f].length > 0);
+		return singlesOk && checksOk;
+	}, [answers]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		if (!isFormComplete) {
+			alert("請完成所有問題");
+			return;
+		}
+		console.log("Answers submitted:", answers);
+		// TODO: 發送 API 或其他處理
+	};
+
+	return (<div className="movie-quiz">
+		<div className="container py-3">
+			<div className="card">
+				<img src="https://images.plurk.com/5z4IlpXfbtkOs151EpW2Kc.jpg " className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
+				<div className="card-body">
+					<div className="card-title text-center mb-5">
+						<h3>懶惰影迷看什麼？</h3>
+					</div>
+					<div className="row pb-4 border-bottom">
+						<div className="col-md-6 py-2">
+							<label htmlFor="fillPerson" className="h5 form-label">暱稱</label>
+							<input type="text" className="form-control py-3" id="fillPerson" placeholder="" required />
+						</div>
+						<div className="col-md-6 py-2">
+							<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期</label>
+							<input type="date" className="form-control py-3" id="fillDate" placeholder="yyyy/mm/dd" required />
+						</div>
+					</div>
+					<form onSubmit={handleSubmit}>
+						<SliderQuestion
+							label="你有多少時間可以看電影？"
+							field="movie"
+							value={answers.movie}
+							onChange={handleSliderChange}
+						/>
+
+						{radioQuestion.map((question) => (
+							<RadioQuestion
+								key={question.id}
+								question={question.question}
+								options={question.options}
+								field={question.field}
+								value={answers[question.field]}
+								onChange={(val) =>
+									setAnswers((prev) => ({ ...prev, [question.field]: val }))
+								}
+							/>
+						))}
+						{checkQuestion.map((question) => (
+							<CheckboxQuestion
+								key={question.id}
+								question={question.question}
+								options={question.options}
+								field={question.field}
+								value={answers[question.field]}
+								onChange={(id, checked) => {
+									setAnswers((prev) => {
+										const current = new Set(prev[question.field]);
+										if (checked) current.add(id);
+										else current.delete(id);
+										return { ...prev, [question.field]: Array.from(current) };
+									});
+								}}
+							/>
+						))}
+						<button type="submit" className="btn btn-outline-dark p-2 w-100 rounded-0 border-2" disabled={!isFormComplete}>送出</button>
+					</form>
+
+				</div>
+			</div>
+
+		</div >
+		<div className="card-footer py-2" style={{backgroundColor:'#C84B53'}}>
+		</div>
+	</div >
 
 
-  const [submitted, setSubmitted] = useState(false);// submitted===true的時候，顯示推薦結果
-  const isFormComplete = Object.values(answers).every((val) => val !== '');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setAnswers((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  // 假設推薦邏輯
-  const recommendMovie = () => {
-    const { genre, mood } = answers;
-    if (genre === 'action' && mood === 'excited') return '《John Wick》';
-    if (genre === 'romance') return '《Before Sunrise》';
-    if (genre === 'drama') return '《The Shawshank Redemption》';
-    return '《Inception》';
-  };
-
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="quiz-page col-md-5 mx-auto mt-4">
-          <h2 className="text-center">懶惰影迷看什麼</h2>
-
-          {!submitted ? (
-            <form onSubmit={handleSubmit}>
-              <QuestionBlock
-                label="今日影迷有幾位"
-                field="person"
-                options={['single', 'double', 'group']}
-                answers={answers}
-                setAnswers={setAnswers}
-                displayMap={{
-                  single: '一人',
-                  double: '雙人',
-                  group: '多人',
-                }}
-              />
-              <QuestionBlock
-                label="語系偏好"
-                field="language"
-                options={['western', 'asian', 'mandarin']}
-                answers={answers}
-                setAnswers={setAnswers}
-                displayMap={{
-                  western: '歐美',
-                  asian: '日韓',
-                  mandarin: '華文',
-                }}
-              />
-              <QuestionBlock
-                label="稍後的行程"
-                field="afterMovie"
-                options={['sleep', 'dining', 'outdoor']}
-                answers={answers}
-                setAnswers={setAnswers}
-                displayMap={{
-                  sleep: '躺平',
-                  dining: '用餐',
-                  outdoor: '戶外活動',
-                }}
-              />
-              <QuestionBlock
-                label="IMDb評分"
-                field="imdbRating"
-                options={['dontCare', 'heigh']}
-                answers={answers}
-                setAnswers={setAnswers}
-                displayMap={{
-                  dontCare: '我不在乎',
-                  heigh: '六分以上',
-                }}
-              />
-              <QuestionBlock
-                label="今天想要"
-                field="mood"
-                options={['cry', 'laugh', 'shock']}
-                answers={answers}
-                setAnswers={setAnswers}
-                displayMap={{
-                  cry: '哭哭啼啼',
-                  laugh: '放聲大笑',
-                  shock: '來點驚嚇',
-                }}
-              />
-              <button type="submit" className="btn btn-outline-dark p-2 w-100 rounded-0 border-2" disabled={!isFormComplete}>送出</button>
-            </form>
-          ) : (
-            <div className="result">
-              <h3>推薦給你的電影是：</h3>
-              <p>{recommendMovie()}</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-
-
-  );
+	)
 }
