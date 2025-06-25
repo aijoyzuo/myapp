@@ -1,11 +1,38 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import SliderQuestion from './component/SliderQuestion';
 import RadioQuestion from './component/RadioQuestion';
 import CheckboxQuestion from './component/CheckboxQuestion';
 
 export default function MovieQuiz() {
-	const [answers, setAnswers] = useState({
-		movie: 90,
+	/* ---------- 載入資料 ---------- */
+	const [title, setTitle] = useState(''); //問卷標題
+	const [titlePic, setTitlePic] = useState('');
+	const [qData, setQData] = useState(null);   // 問卷題目 & 必填規則
+	const [movies, setMovies] = useState([]);     // 電影清單
+
+	const url = `${process.env.PUBLIC_URL}/data/movie.json`;//用環境變數
+
+
+	useEffect(() => {
+		fetch(url)
+			.then(r => {
+				if (!r.ok) throw new Error(`HTTP ${r.status}`);
+				return r.json();
+			})
+			.then(json => {
+				setTitle(json.questionnaire.title);
+				setTitlePic(json.questionnaire.titlePic);
+				setQData(json.questionnaire);
+				setMovies(json.movies);
+			})
+			.catch(err => {
+				console.error('載入 movie.json 失敗 👉', err);
+			});
+	}, []);
+
+	/* ---------- 表單答案 ---------- */
+	const [answers, setAnswers] = useState({ //宣告一個 answers 狀態物件，用來儲存使用者的回答。
+		duration: 90,
 		person: '',
 		afterMovie: '',
 		rating: '',
@@ -13,149 +40,109 @@ export default function MovieQuiz() {
 		mood: []
 	});
 
-	const handleSliderChange = (field, value) => { //當滑桿變動時，用 field 當 key 更新對應答案
-		setAnswers(a => ({ ...a, [field]: value }));
+	/* ---------- 動態驗證 ---------- */
+	const isFormComplete = useMemo(() => {
+		if (!qData) return false;//若 qData 尚未載入，直接回傳 false
+		const { required } = qData;//從問卷資料中取出必填欄位(required)
+		const singlesOk = required.radio.every(f => answers[f]);//判斷所有 必填單選題（radio）欄位是否有被填寫（不是空字串、不是 undefined）
+		const checksOk = required.checkbox.every(f => answers[f].length > 0);
+		return singlesOk && checksOk;
+	}, [answers, qData]);
 
-	};
-
-	const radioQuestion = [
-		{
-			id: "person",
-			field: "person",
-			question: "今日影迷有幾位？",
-			options: [
-				{ id: "single", label: "一人" },
-				{ id: "double", label: "雙人" },
-				{ id: "group", label: "多人" },
-			]
-		},
-		{
-			id: "afterMovie",
-			field: "afterMovie",
-			question: "電影之後的行程？",
-			options: [
-				{ id: "sleep", label: "躺平" },
-				{ id: "dining", label: "用餐" },
-				{ id: "outdoor", label: "戶外活動" },
-			]
-		},
-		{
-			id: "rating",
-			field: "rating",
-			question: "電影評價選擇",
-			options: [
-				{ id: "dontcare", label: "都可以" },
-				{ id: "high", label: "高於六分" },
-			]
-		},
-	]
-	const checkQuestion = [
-		{
-			id: "language",
-			field: "language",
-			question: "語系偏好(複選)",
-			options: [
-				{ id: "western", label: "歐美" },
-				{ id: "Japanese", label: "日文" },
-				{ id: "korean", label: "韓文" },
-				{ id: "mandarin", label: "華文" },
-			]
-		},
-		{
-			id: "mood",
-			field: "mood",
-			question: "今天想要(複選)",
-			options: [
-				{ id: "cry", label: "哭哭啼啼" },
-				{ id: "laugh", label: "放聲大笑" },
-				{ id: "shock", label: "來點驚嚇" },
-			]
-		}
-	]
-
-//表單驗證
-	const requiredSingles = ['person', 'afterMovie', 'rating']; // radio、文字…單選必填
-	const requiredAtLeastOne = ['language', 'mood'];
-	const isFormComplete = useMemo(() => {//只有當依賴的變數（這裡是 answers）改變時，才重新執行函式、重新計算
-		const singlesOk = requiredSingles.every(f => answers[f]);//.every() 是陣列方法，只有全部都滿足條件時才回傳 true;answers[f] 表示該題的作答內容，只要是非空字串（truthy）就算有填
-		const checksOk = requiredAtLeastOne.every(f => answers[f].length > 0);
-		return singlesOk && checksOk;//如果兩個條件都通過，整個問卷才算完成
-	}, [answers]);//useMemo 的依賴陣列，只有當 answers 改變時，才重新評估上面的邏輯
-
+	/* ---------- 送出時用答案篩電影(未完成) ---------- */
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (!isFormComplete) {
-			alert("請完成所有問題");
-			return;
-		}
-		console.log("Answers submitted:", answers);
-		// TODO: 發送 API 或其他處理
+		if (!isFormComplete) return alert('請完成所有問題');
+		const result = movies.filter(m => {
+			// 範例：時長 → 將分鐘對應為 short/medium/long
+			const durCat = answers.duration <= 60 ? 'short'
+				: answers.duration <= 120 ? 'medium' : 'long';
+			const timeOK = m.duration === durCat;
+			const singleOK = ['person', 'afterMovie', 'rating']
+				.every(f => m[f] === answers[f]);
+			const langOK = answers.language.includes(m.language);
+			const moodOK = answers.mood.includes(m.mood);
+			return timeOK && singleOK && langOK && moodOK;
+		});
+		console.log('符合條件的電影：', result);
 	};
 
-	return (<div className="movie-quiz">
-		<div className="container py-3">
-			<div className="card">
-				<img src="https://images.plurk.com/5z4IlpXfbtkOs151EpW2Kc.jpg " className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
-				<div className="card-body">
-					<div className="card-title text-center mb-5">
-						<h3>懶惰影迷看什麼？</h3>
-					</div>
-					<div className="row pb-4 border-bottom">
-						<div className="col-md-6 py-2">
-							<label htmlFor="fillPerson" className="h5 form-label">暱稱</label>
-							<input type="text" className="form-control py-3" id="fillPerson" placeholder="" required />
-						</div>
-						<div className="col-md-6 py-2">
-							<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期</label>
-							<input type="date" className="form-control py-3" id="fillDate" placeholder="yyyy/mm/dd" required />
-						</div>
-					</div>
-					<form onSubmit={handleSubmit}>
-						<SliderQuestion
-							label="你有多少時間可以看電影？"
-							field="movie"
-							value={answers.movie}
-							onChange={handleSliderChange}
-							sliderClassName="slider-movie"//用來變更css
-						/>
+	/* ---------- 等 fetch 完再渲染 ---------- */
+	if (!qData) return <p>Loading questionnaire…</p>;//資料尚未載入時，顯示loading
 
-						{radioQuestion.map((question) => (
-							<RadioQuestion
-								key={question.id}
-								question={question.question}
-								options={question.options}
-								field={question.field}
-								value={answers[question.field]}//將當前欄位的答案作為 value
-								onChange={(val) =>
-									setAnswers((prev) => ({ ...prev, [question.field]: val }))//用變數當作欄位名（例如 "person"），將其值設為 val（選到的選項 id）
-								}
-							/>
-						))}
-						{checkQuestion.map((question) => (
-							<CheckboxQuestion
-								key={question.id}
-								question={question.question}
-								options={question.options}
-								field={question.field}
-								value={answers[question.field]}
-								onChange={(id, checked) => { //這是傳給 CheckboxQuestion 元件的 onChange 回調函式,接收兩個參數：id: 被改變的選項 ID（例如 "korean"）checked: 布林值，表示是否勾選（true 表示勾起，false 表示取消）
-									setAnswers((prev) => {
-										const current = new Set(prev[question.field]);//prev[question.field] 取得目前這題對應的陣列（如 answers["mood"]）,用 Set 封裝
-										// (Set 是一種集合物件，它可以儲存任意數量的唯一值（不重複）)
-										if (checked) current.add(id);//如果勾選這個選項，就加進去
-										else current.delete(id);//如果取消勾選，就移除
-										return { ...prev, [question.field]: Array.from(current) };//把 Set 轉回 Array（因為 answers 中應該存的是 array）
-									});
-								}}
-							/>
-						))}
-						<button type="submit" className="btn btn-outline-dark p-2 w-100 rounded-0 border-2" disabled={!isFormComplete}>送出</button>
-					</form>
+	return (
+		<div className="movie-quiz">
+			<div className="container py-3">
+				<div className="card">
+					<img src={titlePic} className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
+					<div className="card-body">
+						<div className="card-title text-center mb-5">
+							<h3>{title}</h3>
+						</div>
+						<form onSubmit={handleSubmit}>
+							<div className="row pb-4 border-bottom">
+								<div className="col-md-6 py-2">
+									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span class="text-danger">*</span></label>
+									<input type="text" className="form-control py-3" id="fillPerson" placeholder="" required />
+								</div>
+								<div className="col-md-6 py-2">
+									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span class="text-danger">*</span></label>
+									<input type="date" className="form-control py-3" id="fillDate" placeholder="yyyy/mm/dd" required />
+								</div>
+							</div>
+							{qData.questions.filter(q => q.type === 'range').map(q => (
+								<SliderQuestion
+									key={q.id}
+									label={q.label}
+									field={q.field}
+									value={answers[q.field]}
+									min={q.min}
+									max={q.max}
+									step={q.step}
+									onChange={(f, val) => setAnswers(a => ({ ...a, [f]: val }))}
+									sliderClassName="slider-movie"
+								/>
+							))}
+
+							{/* Radio & Checkbox 通用渲染 */}
+							{qData.questions.filter(q => q.type === 'radio').map(q => (
+								<RadioQuestion
+									key={q.id}
+									question={q.label}
+									options={q.options}
+									field={q.field}
+									value={answers[q.field]}
+									onChange={val => setAnswers(a => ({ ...a, [q.field]: val }))}
+								/>
+							))}
+							{qData.questions.filter(q => q.type === 'checkbox').map(q => (
+								<CheckboxQuestion
+									key={q.id}
+									question={q.label}
+									options={q.options}
+									field={q.field}
+									value={answers[q.field]}
+									onChange={(id, checked) => {
+										setAnswers(prev => {
+											const set = new Set(prev[q.field]);
+											checked ? set.add(id) : set.delete(id);
+											return { ...prev, [q.field]: Array.from(set) };
+										});
+									}}
+								/>
+							))}
+
+							<button type="submit" className="btn btn-outline-dark p-2 mt-2  w-100 border-2" disabled={!isFormComplete}>送出</button>
+						</form>
+					</div>
+
 				</div>
 			</div>
-		</div >
-		<div className="card-footer py-2" style={{ backgroundColor: '#C84B53' }}>
+			<div className="card-footer py-2" style={{ backgroundColor: '#ca4231' }}>
+			</div>
+	
 		</div>
-	</div >
+
 	)
+
 }
