@@ -20,10 +20,9 @@ export default function FoodQuiz() {
 				return r.json();
 			})
 			.then(json => {
-				setTitle(json.questionnaire.title);
-				setTitlePic(json.questionnaire.titlePic);
-				setQData(json.questionnaire);
-				setFood(json.food);
+				setTitle(json.data.title);
+				setTitlePic(json.data.titlePic);
+				setQData(json.data);
 			})
 			.catch(err => {
 				console.error('載入 food.json 失敗 👉', err);
@@ -37,19 +36,36 @@ export default function FoodQuiz() {
 		diet: '',
 		rating: '',
 		preference: [],
-		occasion: []
+		occasion: [],
+		fillPerson: '',
+		fillDate: ''
 	});
 
 	/* ---------- 動態驗證 ---------- */
 	const isFormComplete = useMemo(() => {
-		if (!qData) return false;//若 qData 尚未載入，直接回傳 false
-		const { required } = qData;//從問卷資料中取出必填欄位(required)
-		const singlesOk = required.radio.every(f => answers[f]);//判斷所有 必填單選題（radio）欄位是否有被填寫（不是空字串、不是 undefined）
-		const checksOk = required.checkbox.every(f => answers[f].length > 0);
-		return singlesOk && checksOk;
+		if (!qData) return false;
+
+		// 遍歷所有題目
+		return qData.questions.every(q => {
+			const val = answers[q.field];
+
+			if (q.required && q.type === 'radio') {
+				return val !== '';
+			}
+
+			if (q.required && q.type === 'range') {
+				return typeof val === 'number'; // 或可加入範圍驗證
+			}
+
+			if (q.type === 'checkbox' && q.minSelect) {
+				return Array.isArray(val) && val.length >= q.minSelect;
+			}
+
+			return true; // 非必填題都算通過
+		});
 	}, [answers, qData]);
 
-	/* ---------- 送出時用答案篩電影(未完成) ---------- */
+	/* ---------- 送出時用答案篩電影(未完成) ---------- 
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (!isFormComplete) return alert('請完成所有問題');
@@ -65,7 +81,7 @@ export default function FoodQuiz() {
 			return timeOK && singleOK && langOK && moodOK;
 		});
 		console.log('符合條件的電影：', result);
-	};
+	};*/
 
 	/* ---------- 等 fetch 完再渲染 ---------- */
 	if (!qData) return <p>Loading questionnaire…</p>;//資料尚未載入時，顯示loading
@@ -82,12 +98,23 @@ export default function FoodQuiz() {
 						<form onSubmit={handleSubmit}>
 							<div className="row pb-4 border-bottom">
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span class="text-danger">*</span></label>
-									<input type="text" className="form-control py-3" id="fillPerson" placeholder="" required />
+									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span className="text-danger">*</span></label>
+									<input type="text"
+										className="form-control py-3"
+										id="fillPerson"
+										required
+										value={answers.fillPerson}
+										onChange={e => setAnswers(a => ({ ...a, fillPerson: e.target.value }))} />
 								</div>
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span class="text-danger">*</span></label>
-									<input type="date" className="form-control py-3" id="fillDate" placeholder="yyyy/mm/dd" required />
+									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span className="text-danger">*</span></label>
+									<input type="date"
+										className="form-control py-3"
+										id="fillDate"
+										placeholder="yyyy/mm/dd"
+										required
+										value={answers.fillDate}
+										onChange={e => setAnswers(a => ({ ...a, fillDate: e.target.value }))} />
 								</div>
 							</div>
 							{qData.questions.filter(q => q.type === 'range').map(q => (
@@ -140,7 +167,7 @@ export default function FoodQuiz() {
 			</div>
 			<div className="card-footer py-2" style={{ backgroundColor: '#EDBF8D' }}>
 			</div>
-	
+
 		</div>
 
 	)

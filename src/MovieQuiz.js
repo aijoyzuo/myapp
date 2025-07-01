@@ -17,14 +17,14 @@ export default function MovieQuiz() {
 		fetch(url)
 			.then(r => {
 				if (!r.ok) throw new Error(`HTTP ${r.status}`);
-				return r.json();
+				return r.json();//如果請求成功，就將response的json轉成js物件
 			})
-			.then(json => {
-				setTitle(json.questionnaire.title);
-				setTitlePic(json.questionnaire.titlePic);
-				setQData(json.questionnaire);
-				setMovies(json.movies);
+			.then(({ data }) => {
+				setTitle(data.title);
+				setTitlePic(data.titlePic);
+				setQData(data);
 			})
+
 			.catch(err => {
 				console.error('載入 movie.json 失敗 👉', err);
 			});
@@ -37,19 +37,26 @@ export default function MovieQuiz() {
 		afterMovie: '',
 		rating: '',
 		language: [],
-		mood: []
+		mood: [],
+		fillPerson: '',
+		fillDate: ''
 	});
 
-	/* ---------- 動態驗證 ---------- */
+	/* ---------- 必填驗證 ---------- */
 	const isFormComplete = useMemo(() => {
-		if (!qData) return false;//若 qData 尚未載入，直接回傳 false
-		const { required } = qData;//從問卷資料中取出必填欄位(required)
-		const singlesOk = required.radio.every(f => answers[f]);//判斷所有 必填單選題（radio）欄位是否有被填寫（不是空字串、不是 undefined）
-		const checksOk = required.checkbox.every(f => answers[f].length > 0);
-		return singlesOk && checksOk;
+		if (!qData) return false;
+
+		const requiredQuestions = qData.questions.filter(q => q.required);
+		return requiredQuestions.every(q => {
+			const val = answers[q.field];
+			if (q.type === 'checkbox') {
+				return Array.isArray(val) && val.length > 0;
+			}
+			return val !== undefined && val !== '';
+		});
 	}, [answers, qData]);
 
-	/* ---------- 送出時用答案篩電影(未完成) ---------- */
+	/* ---------- 送出時用答案篩電影(未完成) 
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (!isFormComplete) return alert('請完成所有問題');
@@ -65,7 +72,7 @@ export default function MovieQuiz() {
 			return timeOK && singleOK && langOK && moodOK;
 		});
 		console.log('符合條件的電影：', result);
-	};
+	};*/
 
 	/* ---------- 等 fetch 完再渲染 ---------- */
 	if (!qData) return <p>Loading questionnaire…</p>;//資料尚未載入時，顯示loading
@@ -82,12 +89,23 @@ export default function MovieQuiz() {
 						<form onSubmit={handleSubmit}>
 							<div className="row pb-4 border-bottom">
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span class="text-danger">*</span></label>
-									<input type="text" className="form-control py-3" id="fillPerson" placeholder="" required />
+									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span className="text-danger">*</span></label>
+									<input type="text"
+										className="form-control py-3"
+										id="fillPerson"
+										required
+										value={answers.fillPerson}
+										onChange={e => setAnswers(a => ({ ...a, fillPerson: e.target.value }))} />
 								</div>
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span class="text-danger">*</span></label>
-									<input type="date" className="form-control py-3" id="fillDate" placeholder="yyyy/mm/dd" required />
+									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span className="text-danger">*</span></label>
+									<input type="date"
+										className="form-control py-3"
+										id="fillDate"
+										placeholder="yyyy/mm/dd"
+										required
+										value={answers.fillDate}
+										onChange={e => setAnswers(a => ({ ...a, fillDate: e.target.value }))} />
 								</div>
 							</div>
 							{qData.questions.filter(q => q.type === 'range').map(q => (
@@ -140,7 +158,7 @@ export default function MovieQuiz() {
 			</div>
 			<div className="card-footer py-2" style={{ backgroundColor: '#ca4231' }}>
 			</div>
-	
+
 		</div>
 
 	)
