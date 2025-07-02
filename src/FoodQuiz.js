@@ -2,13 +2,14 @@ import { useState, useEffect, useMemo } from 'react';
 import SliderQuestion from './component/SliderQuestion';
 import RadioQuestion from './component/RadioQuestion';
 import CheckboxQuestion from './component/CheckboxQuestion';
+import { useNavigate } from 'react-router-dom';
 
 export default function FoodQuiz() {
 	/* ---------- 載入資料 ---------- */
 	const [title, setTitle] = useState(''); //問卷標題
 	const [titlePic, setTitlePic] = useState('');
 	const [qData, setQData] = useState(null);   // 問卷題目 & 必填規則
-	const [food, setFood] = useState([]);     // 電影清單
+	const navigate = useNavigate();
 
 	const url = `${process.env.PUBLIC_URL}/data/food.json`;//用環境變數
 
@@ -65,23 +66,20 @@ export default function FoodQuiz() {
 		});
 	}, [answers, qData]);
 
-	/* ---------- 送出時用答案篩電影(未完成) ---------- 
+	/* ---------- 送出時用答案篩----*/
+
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (!isFormComplete) return alert('請完成所有問題');
-		const result = food.filter(m => {
-			// 範例：時長 → 將分鐘對應為 short/medium/long
-			const durCat = answers.duration <= 60 ? 'short'
-				: answers.duration <= 120 ? 'medium' : 'long';
-			const timeOK = m.duration === durCat;
-			const singleOK = ['person', 'afterfood', 'rating']
-				.every(f => m[f] === answers[f]);
-			const langOK = answers.language.includes(m.language);
-			const moodOK = answers.mood.includes(m.mood);
-			return timeOK && singleOK && langOK && moodOK;
-		});
-		console.log('符合條件的電影：', result);
-	};*/
+
+		if (!isFormComplete) {
+			alert('請完成所有問題');
+			return;
+		}
+
+		// 導向下一頁，同時用 state 傳遞答案物件
+		navigate('/recommendMovie', { state: { answers } });
+	};
+
 
 	/* ---------- 等 fetch 完再渲染 ---------- */
 	if (!qData) return <p>Loading questionnaire…</p>;//資料尚未載入時，顯示loading
