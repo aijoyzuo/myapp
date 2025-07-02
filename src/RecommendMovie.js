@@ -12,41 +12,55 @@ export default function RecommendMovie() {
 	const url = `${process.env.PUBLIC_URL}/data/moviedata.json`;
 
 	useEffect(() => {
-		if (!answers) {
-			navigate('/quiz/movie');
-			return;
-		}
+		if (!answers) return;
+
+		const url = `${process.env.PUBLIC_URL}/data/movieList.json`;
 
 		fetch(url)
-			.then(res => res.json())
+			.then(r => {
+				if (!r.ok) throw new Error(`HTTP ${r.status}`);
+				return r.json();
+			})
 			.then(({ data }) => {
-				setAllMovies(data);
+				const scoredMovies = data.map(movie => {
+					let score = 0;
 
-				const result = data.filter(movie => {
-					const matchDuration = movie.duration === answers.duration;
-					const matchPerson = movie.person.includes(answers.person);
-					const matchRating = movie.rating === (answers.rating === "high");
+					// 片長：只要在 ±30 分鐘以內就算
+					if (Math.abs(movie.duration - answers.duration) <= 30) score++;
 
-					const matchLanguage = answers.language.some(lang =>
-						(lang === "western" && movie.language === "歐美") ||
-						(lang === "japanese" && movie.language === "日文")
-					);
+					// 觀看對象（字串包含）
+					if (movie.person.includes(answers.person)) score++;
 
-					const matchMood = answers.mood.includes(movie.mood);
+					// 分級布林判斷
+					if (movie.rating === (answers.rating === "high")) score++;
 
-					return (
-						matchDuration &&
-						matchPerson &&
-						matchRating &&
-						matchLanguage &&
-						matchMood
-					);
+					// 語言：只要勾選的語言中有一種 match 就加分
+					if (
+						answers.language.some(lang =>
+							(lang === "western" && movie.language === "歐美") ||
+							(lang === "japanese" && movie.language === "日文")
+						)
+					) score++;
+
+					// 心情：使用者選的 mood 包含這部電影的 mood 就加分
+					if (answers.mood.includes(movie.mood)) score++;
+
+					return { ...movie, score };
 				});
 
-				setRecommended(result.slice(0, 3)); // 最多顯示三部推薦
+				// 篩選得分 > 0 的，取前 3 名
+				const topMovies = scoredMovies
+					.filter(m => m.score > 0)
+					.sort((a, b) => b.score - a.score)
+					.slice(0, 3);
+
+				setRecommended(topMovies);
 			})
-			.catch(err => console.error("讀取電影資料失敗", err));
+			.catch(err => {
+				console.error("載入 movieList.json 失敗 👉", err);
+			});
 	}, [answers]);
+
 
 	if (!answers) return null;
 
