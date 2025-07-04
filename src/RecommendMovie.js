@@ -40,12 +40,21 @@ export default function RecommendMovie() {
           if (
             answers.language.some(lang =>
               (lang === "western" && movie.language === "歐美") ||
-              (lang === "japanese" && movie.language === "日文")
+              (lang === "japanese" && movie.language === "日文")||
+              (lang === "korean" && movie.language === "韓文")||
+              (lang === "mandarin" && movie.language === "華文")
             )
           ) score++;
 
-          // 心情（使用者 mood 陣列是否包含電影 mood）
-          if (answers.mood.includes(movie.mood)) score++;
+          // 心情（使用者 mood 陣列）
+          if (
+            answers.mood.some(mood =>
+              (mood === "cry" && movie.language === "哭哭啼啼") ||
+              (mood === "laugh" && movie.language === "放聲大笑")||
+              (mood === "shock" && movie.language === "來點驚嚇")||
+              (mood === "romantic" && movie.language === "浪漫一波")
+            )
+          ) score++;
 
           return { ...movie, score };
         });
@@ -82,9 +91,9 @@ export default function RecommendMovie() {
                 <p className="card-text">{movie.description}</p>
                 <ul className="list-unstyled small">
                   <li>語言：{movie.language}</li>
-                  <li>心情：{movie.mood}</li>
+                  <li>類型：{movie.genres}</li>
                   <li>片長：{movie.duration}</li>
-                  <li>推薦分數：{movie.score}</li>
+                  <li>適合分數：{movie.score}</li>
                 </ul>
               </div>
             </div>
