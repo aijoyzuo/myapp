@@ -1,12 +1,74 @@
+//userValue是使用者的答案，item.value是電影需要的答案
+
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// ----------不同題型的 handler ----------
+function rangeHandler(item, answers) {
+  const userValue = answers[item.id];
+
+  const classifyDuration = (minutes) => {
+    if (minutes <= 60) return 'short';
+    if (minutes <= 120) return 'medium';
+    return 'long';
+  };
+
+  const userCategory = classifyDuration(userValue);
+  return userCategory === item.value ? 1 : 0;
+}
+
+
+function radioHandler(item, answers) {
+  const userValue = answers[item.id];
+  return item.value.includes(userValue) ? 1 : 0;
+}
+
+function checkboxHandler(item, answers) {
+  const userValues = answers[item.id];
+  if (!Array.isArray(userValues)) return 0;
+
+  const matched = item.value.filter(v => userValues.includes(v));
+  return matched.length;
+}
+
+
+
+// ---------- 總計分數的主函式 ----------
+function answerHandler(quiz, answers) {
+  console.log('🎞️ 当前电影的数据：', quiz.answer)
+  let score = 0;
+  console.log(`📽️ ${quiz.title} 的比對開始`);
+
+  quiz.answer.forEach((item) => {
+    const weight = Number(item.weight) || 1;
+
+    let raw = 0;
+    if (item.type === 'radio') {
+      raw = radioHandler(item, answers);
+    } else if (item.type === 'checkbox') {
+      raw = checkboxHandler(item, answers);
+    } else if (item.type === 'range') {
+      raw = rangeHandler(item, answers);
+    }
+
+    console.log(`  ▶️ 題目 ${item.id}：得 ${raw} * 權重 ${weight} = ${raw * weight}`);
+    score += raw * weight;
+  });
+
+  console.log(`✅ 總分：${score}`);
+  return score;
+}
+
+
+
+
 export default function RecommendMovie() {
-  const { state } = useLocation();
+  const { state } = useLocation();//這兩行把上一頁的答案帶進來
   const answers = state?.answers;
   const navigate = useNavigate();
-  const [allMovies, setAllMovies] = useState([]);
   const [recommended, setRecommended] = useState([]);
+
+
 
   useEffect(() => {
     if (!answers) {
@@ -14,73 +76,35 @@ export default function RecommendMovie() {
       return;
     }
 
-    const url = `${process.env.PUBLIC_URL}/data/moviedata.json`;
 
-    fetch(url)
+    fetch(`{process.env.PUBLIC_URL}/data/moviedata.json`)//這段取得電影data
+
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
       .then(({ data }) => {
-        setAllMovies(data);
+        const scored = data.map(movie => ({
+          ...movie,
+          score: answerHandler(movie, answers) // 用你剛剛的 handler 計算分數
+        }));
 
-        const scoredMovies = data.map(movie => {
-          let score = 0;
-
-          // 片長評分（用分類字串比對）
-          if (movie.duration === answers.duration) score++;
-
-          // 觀看對象（字串包含）
-          if (movie.person.includes(answers.person)) score++;
-
-          // 分級（布林比較）
-          if (movie.rating === (answers.rating === "high")) score++;
-
-          // 語言（回答語言陣列 vs 電影語言）
-          if (
-            answers.language.some(lang =>
-              (lang === "western" && movie.language === "歐美") ||
-              (lang === "japanese" && movie.language === "日文")||
-              (lang === "korean" && movie.language === "韓文")||
-              (lang === "mandarin" && movie.language === "華文")
-            )
-          ) score++;
-
-          // 心情（使用者 mood 陣列）
-          if (
-            answers.mood.some(mood =>
-              (mood === "cry" && movie.language === "哭哭啼啼") ||
-              (mood === "laugh" && movie.language === "放聲大笑")||
-              (mood === "shock" && movie.language === "來點驚嚇")||
-              (mood === "romantic" && movie.language === "浪漫一波")
-            )
-          ) score++;
-
-          return { ...movie, score };
-        });
-
-        // 排序 + 取前3名（若分數相同則打散）
-        const topMovies = scoredMovies
+        const top = scored
           .filter(m => m.score > 0)
-          .sort((a, b) => {
-            if (b.score !== a.score) return b.score - a.score;
-            return Math.random() - 0.5; // 分數相同時隨機
-          })
+          .sort((a, b) => b.score - a.score || Math.random() - 0.5)
           .slice(0, 3);
 
-        setRecommended(topMovies);
+        setRecommended(top);
       })
-      .catch(err => {
-        console.error("讀取 movieList.json 失敗 👉", err);
-      });
-
+      .catch(err => console.error("讀取失敗 👉", err));
   }, [answers, navigate]);
-
   if (!answers) return null;
+
+
 
   return (
     <div className="container py-5">
-      <h2 className="mb-4 text-center">🎬 根據你的選擇，我們推薦以下電影：</h2>
+      <h2 className="text-center mb-4">🎬 根據你的選擇，我們推薦：</h2>
       <div className="row">
         {recommended.map(movie => (
           <div key={movie.id} className="col-md-4 mb-4">
@@ -91,9 +115,9 @@ export default function RecommendMovie() {
                 <p className="card-text">{movie.description}</p>
                 <ul className="list-unstyled small">
                   <li>語言：{movie.language}</li>
-                  <li>類型：{movie.genres}</li>
-                  <li>片長：{movie.duration}</li>
-                  <li>適合分數：{movie.score}</li>
+                  <li>類型：{movie.genres.join('、')}</li>
+                  <li>片長分類：{movie.duration}</li>
+                  <li>配對分數：{movie.score}</li>
                 </ul>
               </div>
             </div>
