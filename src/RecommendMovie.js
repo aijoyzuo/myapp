@@ -1,9 +1,7 @@
-//userValue是使用者的答案，item.value是電影需要的答案
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// ----------不同題型的 handler ----------
+// ---------- 不同題型的 handler ----------
 function rangeHandler(item, answers) {
   const userValue = answers[item.id];
 
@@ -16,7 +14,6 @@ function rangeHandler(item, answers) {
   const userCategory = classifyDuration(userValue);
   return userCategory === item.value ? 1 : 0;
 }
-
 
 function radioHandler(item, answers) {
   const userValue = answers[item.id];
@@ -31,16 +28,14 @@ function checkboxHandler(item, answers) {
   return matched.length;
 }
 
-
-
-// ---------- 總計分數的主函式 ----------
-function answerHandler(quiz, answers) {
-  console.log('當前電影的數據：', quiz.answer)
+// ---------- 主比對邏輯 ----------
+function answerHandler(quiz, answers, questionMeta) {
   let score = 0;
   console.log(`${quiz.title} 的比對開始`);
 
   quiz.answer.forEach((item) => {
-    const weight = Number(item.weight) || 1;
+    const meta = questionMeta.find(q => q.id === item.id);
+    const weight = Number(meta?.weight || 1); // 從 movie.json 抓權重，沒寫就預設 1
 
     let raw = 0;
     if (item.type === 'radio') {
@@ -59,16 +54,11 @@ function answerHandler(quiz, answers) {
   return score;
 }
 
-
-
-
 export default function RecommendMovie() {
-  const { state } = useLocation();//這兩行把上一頁的答案帶進來
+  const { state } = useLocation();
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
-
-
 
   useEffect(() => {
     if (!answers) {
@@ -76,31 +66,36 @@ export default function RecommendMovie() {
       return;
     }
 
-
-    fetch(`${process.env.PUBLIC_URL}/data/moviedata.json`)//這段取得電影data
-
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
+    // 先載入 movie.json，取得題目的權重
+    fetch(`${process.env.PUBLIC_URL}/data/movie.json`)
+      .then(res => res.json())
       .then(({ data }) => {
-        const scored = data.map(movie => ({
-          ...movie,
-          score: answerHandler(movie, answers) // 用你剛剛的 handler 計算分數
-        }));
+        const questionMeta = data.questions;
 
-        const top = scored
-          .filter(m => m.score > 0)
-          .sort((a, b) => b.score - a.score || Math.random() - 0.5)
-          .slice(0, 3);
+        // 再載入電影資料
+        fetch(`${process.env.PUBLIC_URL}/data/moviedata.json`)
+          .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then(({ data }) => {
+            const scored = data.map(movie => ({
+              ...movie,
+              score: answerHandler(movie, answers, questionMeta)
+            }));
 
-        setRecommended(top);
+            const top = scored
+              .filter(m => m.score > 0)
+              .sort((a, b) => b.score - a.score || Math.random() - 0.5)
+              .slice(0, 3);
+
+            setRecommended(top);
+          });
       })
       .catch(err => console.error("讀取失敗 👉", err));
   }, [answers, navigate]);
+
   if (!answers) return null;
-
-
 
   return (
     <div className="container py-5">
