@@ -27,7 +27,7 @@ export default function MovieQuiz() {
 			})
 
 			.catch(err => {
-				console.error('載入 movie.json 失敗 ', err);
+				console.error('載入 movie.json 失敗', err);
 			});
 	}, []);
 
