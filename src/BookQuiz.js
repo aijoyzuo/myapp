@@ -18,54 +18,44 @@ export default function BookQuiz() {
 		fetch(url)
 			.then(r => {
 				if (!r.ok) throw new Error(`HTTP ${r.status}`);
-				return r.json();
+				return r.json();//如果請求成功，就將response的json轉成js物件
 			})
-			.then(json => {
-				setTitle(json.data.title);
-				setTitlePic(json.data.titlePic);
-				setQData(json.data);
+			.then(({ data }) => {
+				setTitle(data.title);
+				setTitlePic(data.titlePic);
+				setQData(data);
 			})
+
 			.catch(err => {
-				console.error('載入 book.json 失敗 👉', err);
+				console.error('載入 book.json 失敗 ', err);
 			});
 	}, []);
 
 	/* ---------- 表單答案 ---------- */
 	const [answers, setAnswers] = useState({ //宣告一個 answers 狀態物件，用來儲存使用者的回答。
-		duration: 90,
-		genre: '',
-		preference: '',
-		rating: '',
-		language: [],
+		duration: 90,                        // 輸入分鐘
+		genre: "",                   // 喜歡的類型
+		preference: "",          // 偏好單本 or 系列
+		rating: "",                 // 評級
+		language: [],             // 書籍語系喜好
 		mood: [],
 		fillPerson: '',
 		fillDate: ''
 	});
 
-	/* ---------- 動態驗證 ---------- */
+	/* ---------- 必填驗證 ---------- */
 	const isFormComplete = useMemo(() => {
 		if (!qData) return false;
 
-		// 遍歷所有題目
-		return qData.questions.every(q => {
+		const requiredQuestions = qData.questions.filter(q => q.required);
+		return requiredQuestions.every(q => {
 			const val = answers[q.field];
-
-			if (q.required && q.type === 'radio') {
-				return val !== '';
+			if (q.type === 'checkbox') {
+				return Array.isArray(val) && val.length > 0;
 			}
-
-			if (q.required && q.type === 'range') {
-				return typeof val === 'number'; // 或可加入範圍驗證
-			}
-
-			if (q.type === 'checkbox' && q.minSelect) {
-				return Array.isArray(val) && val.length >= q.minSelect;
-			}
-
-			return true; // 非必填題都算通過
+			return val !== undefined && val !== '';
 		});
 	}, [answers, qData]);
-
 
 	/* ---------- 送出時用答案篩----*/
 
@@ -78,8 +68,9 @@ export default function BookQuiz() {
 		}
 
 		// 導向下一頁，同時用 state 傳遞答案物件
-		navigate('/recommendMovie', { state: { answers } });
+		navigate('/quiz/recommendBook', { state: { answers } });
 	};
+
 
 
 	/* ---------- 等 fetch 完再渲染 ---------- */
@@ -97,7 +88,7 @@ export default function BookQuiz() {
 						<form onSubmit={handleSubmit}>
 							<div className="row pb-4 border-bottom">
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span class="text-danger">*</span></label>
+									<label htmlFor="fillPerson" className="h5 form-label">暱稱<span className="text-danger">*</span></label>
 									<input type="text"
 										className="form-control py-3"
 										id="fillPerson"
@@ -106,7 +97,7 @@ export default function BookQuiz() {
 										onChange={e => setAnswers(a => ({ ...a, fillPerson: e.target.value }))} />
 								</div>
 								<div className="col-md-6 py-2">
-									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span class="text-danger">*</span></label>
+									<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span className="text-danger">*</span></label>
 									<input type="date"
 										className="form-control py-3"
 										id="fillDate"

@@ -78,7 +78,8 @@
                         "id": "restricted",
                         "label": "限制級"
                     }
-                ]
+                ],
+                "weight": 4
             },
             {
                 "id": "language",
@@ -103,7 +104,8 @@
                         "id": "mandarin",
                         "label": "華文"
                     }
-                ]
+                ],
+                "weight": 3
             },
             {
                 "id": "mood",

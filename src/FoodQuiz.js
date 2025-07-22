@@ -18,15 +18,16 @@ export default function FoodQuiz() {
 		fetch(url)
 			.then(r => {
 				if (!r.ok) throw new Error(`HTTP ${r.status}`);
-				return r.json();
+				return r.json();//如果請求成功，就將response的json轉成js物件
 			})
-			.then(json => {
-				setTitle(json.data.title);
-				setTitlePic(json.data.titlePic);
-				setQData(json.data);
+			.then(({ data }) => {
+				setTitle(data.title);
+				setTitlePic(data.titlePic);
+				setQData(data);
 			})
+
 			.catch(err => {
-				console.error('載入 food.json 失敗 👉', err);
+				console.error('載入 food.json 失敗 ', err);
 			});
 	}, []);
 
@@ -36,33 +37,23 @@ export default function FoodQuiz() {
 		person: '',
 		diet: '',
 		rating: '',
-		preference: [],
-		occasion: [],
+		preference: [],   // ✅ food 中的口味喜好
+		occasion: [],     // ✅ 用餐場合
 		fillPerson: '',
 		fillDate: ''
 	});
 
-	/* ---------- 動態驗證 ---------- */
+	/* ---------- 必填驗證 ---------- */
 	const isFormComplete = useMemo(() => {
 		if (!qData) return false;
 
-		// 遍歷所有題目
-		return qData.questions.every(q => {
+		const requiredQuestions = qData.questions.filter(q => q.required);
+		return requiredQuestions.every(q => {
 			const val = answers[q.field];
-
-			if (q.required && q.type === 'radio') {
-				return val !== '';
+			if (q.type === 'checkbox') {
+				return Array.isArray(val) && val.length > 0;
 			}
-
-			if (q.required && q.type === 'range') {
-				return typeof val === 'number'; // 或可加入範圍驗證
-			}
-
-			if (q.type === 'checkbox' && q.minSelect) {
-				return Array.isArray(val) && val.length >= q.minSelect;
-			}
-
-			return true; // 非必填題都算通過
+			return val !== undefined && val !== '';
 		});
 	}, [answers, qData]);
 
@@ -77,8 +68,9 @@ export default function FoodQuiz() {
 		}
 
 		// 導向下一頁，同時用 state 傳遞答案物件
-		navigate('/recommendMovie', { state: { answers } });
+		navigate('/quiz/recommendFood', { state: { answers } });
 	};
+
 
 
 	/* ---------- 等 fetch 完再渲染 ---------- */
@@ -163,7 +155,7 @@ export default function FoodQuiz() {
 
 				</div>
 			</div>
-			<div className="card-footer py-2" style={{ backgroundColor: '#EDBF8D' }}>
+			<div className="card-footer py-2" style={{ backgroundColor: '#f6da85' }}>
 			</div>
 
 		</div>

@@ -4,7 +4,7 @@
       "id": "food001",
       "title": "韓式炸雞",
       "description": "酥脆外皮搭配甜辣醬汁，韓味十足",
-      "image": "${PUBLIC_URL}/images/food/001.jpg",
+      "image": "/images/food/001.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -70,7 +70,7 @@
       "id": "food002",
       "title": "日式壽司",
       "description": "新鮮握壽司與手卷搭配味噌湯",
-      "image": "${PUBLIC_URL}/images/food/002.jpg",
+      "image": "/images/food/002.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -134,7 +134,7 @@
       "id": "food003",
       "title": "泰式綠咖哩雞",
       "description": "香料濃郁的綠咖哩搭配椰奶",
-      "image": "${PUBLIC_URL}/images/food/003.jpg",
+      "image": "/images/food/003.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -198,7 +198,7 @@
       "id": "food004",
       "title": "義式海鮮燉飯",
       "description": "吸飽海鮮鮮味的濕潤米飯",
-      "image": "${PUBLIC_URL}/images/food/004.jpg",
+      "image": "/images/food/004.jpg",
       "duration": "long",
       "person": [
         "double",
@@ -262,7 +262,7 @@
       "id": "food005",
       "title": "宮保雞丁蓋飯",
       "description": "經典中式熱炒，微辣下飯",
-      "image": "${PUBLIC_URL}/images/food/005.jpg",
+      "image": "/images/food/005.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -322,7 +322,7 @@
       "id": "food006",
       "title": "素食南瓜咖哩飯",
       "description": "溫潤南瓜搭配香料，無肉也豐富",
-      "image": "${PUBLIC_URL}/images/food/006.jpg",
+      "image": "/images/food/006.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -386,7 +386,7 @@
       "id": "food007",
       "title": "韓式部隊鍋",
       "description": "泡菜、年糕與火腿熱騰騰上桌",
-      "image": "${PUBLIC_URL}/images/food/007.jpg",
+      "image": "/images/food/007.jpg",
       "duration": "long",
       "person": [
         "double",
@@ -450,7 +450,7 @@
       "id": "food008",
       "title": "日式拉麵",
       "description": "濃厚豚骨湯底與彈牙麵條",
-      "image": "${PUBLIC_URL}/images/food/008.jpg",
+      "image": "/images/food/008.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -510,7 +510,7 @@
       "id": "food009",
       "title": "泰式涼拌青木瓜",
       "description": "酸辣開胃，輕食首選",
-      "image": "${PUBLIC_URL}/images/food/009.jpg",
+      "image": "/images/food/009.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -570,7 +570,7 @@
       "id": "food010",
       "title": "義式瑪格麗特披薩",
       "description": "經典番茄起司羅勒，簡單純粹",
-      "image": "${PUBLIC_URL}/images/food/010.jpg",
+      "image": "/images/food/010.jpg",
       "duration": "medium",
       "person": [
         "double",
@@ -634,7 +634,7 @@
       "id": "food011",
       "title": "小籠包套餐",
       "description": "湯汁飽滿，搭配小菜與湯品",
-      "image": "${PUBLIC_URL}/images/food/011.jpg",
+      "image": "/images/food/011.jpg",
       "duration": "medium",
       "person": [
         "double"
@@ -696,7 +696,7 @@
       "id": "food012",
       "title": "日式豆腐鍋",
       "description": "清爽高湯與蔬菜豆腐",
-      "image": "${PUBLIC_URL}/images/food/012.jpg",
+      "image": "/images/food/012.jpg",
       "duration": "long",
       "person": [
         "single",
@@ -760,7 +760,7 @@
       "id": "food013",
       "title": "韓式拌飯",
       "description": "拌入辣醬與各式配料",
-      "image": "${PUBLIC_URL}/images/food/013.jpg",
+      "image": "/images/food/013.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -822,7 +822,7 @@
       "id": "food014",
       "title": "泰式酸辣海鮮湯",
       "description": "Tom Yum 濃郁酸辣風味",
-      "image": "${PUBLIC_URL}/images/food/014.jpg",
+      "image": "/images/food/014.jpg",
       "duration": "medium",
       "person": [
         "double"
@@ -882,7 +882,7 @@
       "id": "food015",
       "title": "焗烤千層麵",
       "description": "起司牽絲，濃郁肉醬層層堆疊",
-      "image": "${PUBLIC_URL}/images/food/015.jpg",
+      "image": "/images/food/015.jpg",
       "duration": "long",
       "person": [
         "double",
@@ -946,7 +946,7 @@
       "id": "food016",
       "title": "中式便當",
       "description": "經濟實惠，主菜與配菜兼備",
-      "image": "${PUBLIC_URL}/images/food/016.jpg",
+      "image": "/images/food/016.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -1006,7 +1006,7 @@
       "id": "food017",
       "title": "素食炒米粉",
       "description": "簡單又美味的傳統台灣素食料理",
-      "image": "${PUBLIC_URL}/images/food/017.jpg",
+      "image": "/images/food/017.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -1068,7 +1068,7 @@
       "id": "food018",
       "title": "義式燉蔬菜湯",
       "description": "羅宋湯風格的清爽蔬菜料理",
-      "image": "${PUBLIC_URL}/images/food/018.jpg",
+      "image": "/images/food/018.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -1132,7 +1132,7 @@
       "id": "food019",
       "title": "韓式石鍋拌飯",
       "description": "鍋巴香脆，辣醬提升風味",
-      "image": "${PUBLIC_URL}/images/food/019.jpg",
+      "image": "/images/food/019.jpg",
       "duration": "long",
       "person": [
         "single",
@@ -1194,7 +1194,7 @@
       "id": "food020",
       "title": "日式炸蝦蓋飯",
       "description": "酥炸天婦羅淋醬飯",
-      "image": "${PUBLIC_URL}/images/food/020.jpg",
+      "image": "/images/food/020.jpg",
       "duration": "medium",
       "person": [
         "single"
@@ -1256,7 +1256,7 @@
       "id": "food021",
       "title": "素食炒河粉",
       "description": "Q彈河粉搭配豆芽與蔬菜",
-      "image": "${PUBLIC_URL}/images/food/021.jpg",
+      "image": "/images/food/021.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -1316,7 +1316,7 @@
       "id": "food022",
       "title": "蒜香義大利麵",
       "description": "橄欖油與蒜片簡單卻美味",
-      "image": "${PUBLIC_URL}/images/food/022.jpg",
+      "image": "/images/food/022.jpg",
       "duration": "short",
       "person": [
         "single"
@@ -1378,7 +1378,7 @@
       "id": "food023",
       "title": "廣東雲吞湯麵",
       "description": "雲吞搭配大骨湯與麵條",
-      "image": "${PUBLIC_URL}/images/food/023.jpg",
+      "image": "/images/food/023.jpg",
       "duration": "medium",
       "person": [
         "single",
@@ -1440,7 +1440,7 @@
       "id": "food024",
       "title": "素食壽司卷",
       "description": "蔬菜與豆皮捲成的壽司組合",
-      "image": "${PUBLIC_URL}/images/food/024.jpg",
+      "image": "/images/food/024.jpg",
       "duration": "short",
       "person": [
         "single",
@@ -1504,7 +1504,7 @@
       "id": "food025",
       "title": "豬排飯",
       "description": "剛剛才養大的豬",
-      "image": "${PUBLIC_URL}/images/food/025.jpg",
+      "image": "/images/food/025.jpg",
       "duration": "short",
       "person": [
         "single",

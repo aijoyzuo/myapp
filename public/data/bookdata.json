@@ -18,7 +18,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -78,7 +78,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "long"
         },
@@ -138,7 +138,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -197,7 +197,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -256,7 +256,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -315,7 +315,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -375,7 +375,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -435,7 +435,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -494,7 +494,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -553,7 +553,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -612,7 +612,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -671,7 +671,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "long"
         },
@@ -730,7 +730,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "long"
         },
@@ -789,7 +789,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -848,7 +848,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -907,7 +907,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -966,7 +966,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -1025,7 +1025,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -1084,7 +1084,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -1143,7 +1143,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -1199,9 +1199,10 @@
       ],
       "mood": [
         "emotional"
-      ] "answer": [
+      ],
+      "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "long"
         },
@@ -1260,7 +1261,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -1319,7 +1320,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "medium"
         },
@@ -1378,7 +1379,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },
@@ -1437,7 +1438,7 @@
       ],
       "answer": [
         {
-          "id": "book",
+          "id": "duration",
           "type": "range",
           "value": "short"
         },

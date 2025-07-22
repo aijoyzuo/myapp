@@ -49,7 +49,8 @@
             "id": "vegetarian",
             "label": "素食"
           }
-        ]
+        ],
+        "weight": 3
       },
       {
         "id": "rating",
@@ -99,7 +100,8 @@
             "id": "chinese",
             "label": "中式"
           }
-        ]
+        ],
+        "weight": 3
       },
       {
         "id": "occasion",
