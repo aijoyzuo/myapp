@@ -35,15 +35,9 @@ function checkboxHandler(item, answers) {
 
 // ---------- 總計分數的主函式 ----------
 function answerHandler(quiz, answers) {
-<<<<<<< HEAD
   console.log('當前電影的數據：', quiz.answer)
   let score = 0;
   console.log(`${quiz.title} 的比對開始`);
-=======
-  console.log('🎞️ 当前电影的数据：', quiz.answer)
-  let score = 0;
-  console.log(`📽️ ${quiz.title} 的比對開始`);
->>>>>>> a116725d4276861c001ccc3a53cf15175d664ccf
 
   quiz.answer.forEach((item) => {
     const weight = Number(item.weight) || 1;
@@ -57,19 +51,11 @@ function answerHandler(quiz, answers) {
       raw = rangeHandler(item, answers);
     }
 
-<<<<<<< HEAD
     console.log(` 題目 ${item.id}：得 ${raw} * 權重 ${weight} = ${raw * weight}`);
     score += raw * weight;
   });
 
   console.log(`總分：${score}`);
-=======
-    console.log(`  ▶️ 題目 ${item.id}：得 ${raw} * 權重 ${weight} = ${raw * weight}`);
-    score += raw * weight;
-  });
-
-  console.log(`✅ 總分：${score}`);
->>>>>>> a116725d4276861c001ccc3a53cf15175d664ccf
   return score;
 }
 
@@ -91,11 +77,7 @@ export default function RecommendMovie() {
     }
 
 
-<<<<<<< HEAD
     fetch(`${process.env.PUBLIC_URL}/data/moviedata.json`)//這段取得電影data
-=======
-    fetch(`{process.env.PUBLIC_URL}/data/moviedata.json`)//這段取得電影data
->>>>>>> a116725d4276861c001ccc3a53cf15175d664ccf
 
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

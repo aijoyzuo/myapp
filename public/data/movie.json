@@ -34,7 +34,8 @@
                         "id": "group",
                         "label": "多人"
                     }
-                ]
+                ],
+                "weight": 2
             },
             {
                 "id": "afterMovie",
@@ -97,7 +98,8 @@
                         "id": "mandarin",
                         "label": "華文"
                     }
-                ]
+                ],
+                "weight": 3
             },
             {
                 "id": "mood",
@@ -122,7 +124,8 @@
                         "id": "romantic",
                         "label": "浪漫一波"
                     }
-                ]
+                ],
+                "weight": 3
             }
         ]   
     }
