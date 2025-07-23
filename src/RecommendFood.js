@@ -44,6 +44,11 @@ function answerHandler(quiz, answers, questionMeta) {
       raw = rangeHandler(item, answers);
     }
 
+    if (item.id === 'diet' && quiz.diet === 'vegetarian') {
+      console.log(` 跳過 ${item.id}（vegetarian，不加權）`);
+      return; // 跳過這題不加分
+    }
+
     console.log(` 題目 ${item.id}：得 ${raw} * 權重 ${weight} = ${raw * weight}`);
     score += raw * weight;
   });
@@ -97,52 +102,72 @@ export default function RecommendFood() {
 
   return (
     <div className="container py-5">
-      <h2 className="text-center mb-4">🍽 根據你的選擇，我們推薦：</h2>
-      <div className="row">
-        {recommended.map((food, index) => (
-          <div key={food.id} className="col-md-4 mb-4 position-relative">
-            <div className="card h-100">
-              <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end" style={{ backgroundColor: 'rgba(255, 193, 7, 0.7)' }}>
-                <i className="bi bi-award-fill me-1" />No.{index + 1}
-              </div>
-              <img src={`${process.env.PUBLIC_URL}${food.image}`} className="card-img-top object-fit-cover" style={{ height: '250px', objectPosition: 'center' }} alt={food.title} />
-              <div className="card-body">
-                <div className="d-flex gap-2">
-                  <h5 className="card-title">{food.title}</h5>
-                  {food.diet !== '葷素皆可' && <div><p className="badge bg-warning text-dark">{food.diet}</p></div>}
+      <header className="text-center py-3 shadow-sm fixed-top" style={{ backgroundColor: '#f6da85' }}>
+        <h5 className="m-0">懶惰吃貨的飲食推薦系統</h5>
+      </header>
+      <main className="flex-grow-1 pt-5 mt-4">
+        <h2 className="text-center mb-4">🍽 根據你的選擇，我們推薦：</h2>
+        <div className="row">
+          {recommended.map((food, index) => (
+            <div key={food.id} className="col-md-4 mb-4 position-relative">
+              <div className="card h-100">
+                <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end" style={{ backgroundColor: 'rgba(255, 193, 7, 0.7)' }}>
+                  <i className="bi bi-award-fill me-1" />No.{index + 1}
                 </div>
-                <p className="card-text">{food.description}</p>
-                <ul className="list-unstyled small">
-                  <li>料理分類：{food.preference?.join?.('、')}</li>
-                  <li>推薦指數：{food.score} 顆星</li>
-                </ul>
+                <img src={`${process.env.PUBLIC_URL}${food.image}`} className="card-img-top object-fit-cover" style={{ height: '250px', objectPosition: 'center' }} alt={food.title} />
+                <div className="card-body">
+                  <div className="d-flex gap-2">
+                    <h5 className="card-title">{food.title}</h5>
+                    {food.diet !== '葷素皆可' && <div><p className="badge bg-warning text-dark">{food.diet}</p></div>}
+                  </div>
+                  <p className="card-text">{food.description}</p>
+                  <ul className="list-unstyled small">
+                    <li>料理分類：{food.preference?.join?.('、')}</li>
+                    <li>推薦指數：{food.score} 顆星</li>
+                  </ul>
+                </div>
               </div>
             </div>
+          ))}
+          {recommended.length === 0 && (
+            <p className="text-center mt-5">抱歉，找不到符合條件的料理。</p>
+          )}
+        </div>
+        <div className="row justify-content-center mt-4">
+          <div className="col-12 col-md-4">
+            <button
+              className="btn w-100 text-center mt-4"
+              style={{ backgroundColor: '#f6da85' }}
+              onClick={() => {
+                Swal.fire({
+                  title: '確定要回到轉盤頁？',
+                  text: '這會清除目前的推薦結果',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonText: '確定',
+                  cancelButtonText: '取消',
+                  customClass: {
+                    confirmButton: 'btn btn-warning mx-2',
+                    cancelButton: 'btn btn-outline-secondary bg-white mx-2',
+                    actions: 'swal2-button-group-gap'
+                  },
+                  buttonsStyling: false, // 必須關閉原生 styling 才會套用上面的 class
+                  background: '#fffbe6'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    navigate('/');
+                  }
+                });
+              }}
+            >
+              再懶一次
+            </button>
           </div>
-        ))}
-        {recommended.length === 0 && (
-          <p className="text-center mt-5">抱歉，找不到符合條件的料理。</p>
-        )}
-      </div>
-      <button
-        className="btn btn-primary w-100 text-center mt-4"
-        onClick={() => {
-          Swal.fire({
-            title: '確定要回到轉盤頁？',
-            text: '這會清除目前的推薦結果',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: '確定要再懶一次',
-            cancelButtonText: '取消'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate('/');
-            }
-          });
-        }}
-      >
-        🔄 再懶一次
-      </button>
+        </div>
+      </main>
+      <footer className="bg-dark text-white text-center py-3 fixed-bottom">
+        <small>© {new Date().getFullYear()} All rights reserved.</small>
+      </footer>
     </div >
   );
 }
