@@ -105,7 +105,7 @@ export default function RecommendFood() {
       <header className="text-center py-3 shadow-sm fixed-top" style={{ backgroundColor: '#f6da85' }}>
         <h5 className="m-0">懶惰吃貨的飲食推薦系統</h5>
       </header>
-      <main className="flex-grow-1 pt-5 mt-4">
+      <main className="flex-grow-1 py-5 mt-4">
         <h2 className="text-center mb-4">🍽 根據你的選擇，我們推薦：</h2>
         <div className="row">
           {recommended.map((food, index) => (
