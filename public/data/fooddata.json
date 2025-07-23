@@ -11,10 +11,10 @@
         "double",
         "group"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "korean"
+        "韓式料理"
       ],
       "occasion": [
         "casual",
@@ -76,10 +76,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "premium",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "romantic",
@@ -140,10 +140,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "thai"
+        "泰式料理"
       ],
       "occasion": [
         "casual",
@@ -204,10 +204,10 @@
         "double",
         "group"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "premium",
       "preference": [
-        "italian"
+        "義式料理"
       ],
       "occasion": [
         "celebrate",
@@ -267,10 +267,10 @@
       "person": [
         "single"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "chinese"
+        "中式料理"
       ],
       "occasion": [
         "casual"
@@ -328,10 +328,10 @@
         "single",
         "double"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "budget",
       "preference": [
-        "thai"
+        "泰式料理"
       ],
       "occasion": [
         "casual",
@@ -392,10 +392,10 @@
         "double",
         "group"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "korean"
+        "韓式料理"
       ],
       "occasion": [
         "family",
@@ -455,10 +455,10 @@
       "person": [
         "single"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "casual"
@@ -515,10 +515,10 @@
       "person": [
         "single"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "budget",
       "preference": [
-        "thai"
+        "泰式料理"
       ],
       "occasion": [
         "casual"
@@ -576,10 +576,10 @@
         "double",
         "group"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "medium",
       "preference": [
-        "italian"
+        "義式料理"
       ],
       "occasion": [
         "family",
@@ -639,10 +639,10 @@
       "person": [
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "chinese"
+        "中式料理"
       ],
       "occasion": [
         "celebrate",
@@ -702,10 +702,10 @@
         "single",
         "double"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "medium",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "family",
@@ -766,10 +766,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "korean"
+        "韓式料理"
       ],
       "occasion": [
         "casual"
@@ -827,10 +827,10 @@
       "person": [
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "thai"
+        "泰式料理"
       ],
       "occasion": [
         "celebrate"
@@ -888,10 +888,10 @@
         "double",
         "group"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "italian"
+        "義式料理"
       ],
       "occasion": [
         "family",
@@ -951,10 +951,10 @@
       "person": [
         "single"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "chinese"
+        "中式料理"
       ],
       "occasion": [
         "casual"
@@ -1011,10 +1011,10 @@
       "person": [
         "single"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "budget",
       "preference": [
-        "chinese"
+        "中式料理"
       ],
       "occasion": [
         "casual",
@@ -1074,10 +1074,10 @@
         "single",
         "double"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "medium",
       "preference": [
-        "italian"
+        "義式料理"
       ],
       "occasion": [
         "casual",
@@ -1138,10 +1138,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "korean"
+        "韓式料理"
       ],
       "occasion": [
         "celebrate"
@@ -1199,10 +1199,10 @@
       "person": [
         "single"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "medium",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "casual",
@@ -1261,10 +1261,10 @@
       "person": [
         "single"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "budget",
       "preference": [
-        "thai"
+        "泰式料理"
       ],
       "occasion": [
         "casual"
@@ -1321,10 +1321,10 @@
       "person": [
         "single"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "budget",
       "preference": [
-        "italian"
+        "義式料理"
       ],
       "occasion": [
         "casual",
@@ -1384,10 +1384,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "chinese"
+        "中式料理"
       ],
       "occasion": [
         "casual"
@@ -1446,10 +1446,10 @@
         "single",
         "double"
       ],
-      "diet": "vegetarian",
+      "diet": "素食",
       "rating": "medium",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "casual",
@@ -1510,10 +1510,10 @@
         "single",
         "double"
       ],
-      "diet": "none",
+      "diet": "葷素皆可",
       "rating": "budget",
       "preference": [
-        "japanese"
+        "日式料理"
       ],
       "occasion": [
         "casual",

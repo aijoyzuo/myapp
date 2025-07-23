@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // ---------- 不同題型的 handler ----------
 function rangeHandler(item, answers) {
@@ -89,7 +90,7 @@ export default function RecommendFood() {
             setRecommended(top);
           });
       })
-      .catch(err => console.error("讀取失敗 👉", err));
+      .catch(err => console.error("讀取失敗", err));
   }, [answers, navigate]);
 
   if (!answers) return null;
@@ -98,19 +99,22 @@ export default function RecommendFood() {
     <div className="container py-5">
       <h2 className="text-center mb-4">🍽 根據你的選擇，我們推薦：</h2>
       <div className="row">
-        {recommended.map(food => (
-          <div key={food.id} className="col-md-4 mb-4">
+        {recommended.map((food, index) => (
+          <div key={food.id} className="col-md-4 mb-4 position-relative">
             <div className="card h-100">
-              <img src={`${process.env.PUBLIC_URL}${food.image}`}  className="card-img-top" alt={food.title} />
+              <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end" style={{ backgroundColor: 'rgba(255, 193, 7, 0.7)' }}>
+                <i className="bi bi-award-fill me-1" />No.{index + 1}
+              </div>
+              <img src={`${process.env.PUBLIC_URL}${food.image}`} className="card-img-top object-fit-cover" style={{ height: '250px', objectPosition: 'center' }} alt={food.title} />
               <div className="card-body">
-                <h5 className="card-title">{food.title}</h5>
+                <div className="d-flex gap-2">
+                  <h5 className="card-title">{food.title}</h5>
+                  {food.diet !== '葷素皆可' && <div><p className="badge bg-warning text-dark">{food.diet}</p></div>}
+                </div>
                 <p className="card-text">{food.description}</p>
                 <ul className="list-unstyled small">
-                  <li>飲食分類：{food.diet}</li>
-                  <li>偏好料理：{food.preference?.join?.('、')}</li>
-                  <li>用餐時機：{food.occasion?.join?.('、')}</li>
-                  <li>耗時分類：{food.duration}</li>
-                  <li>配對分數：{food.score}</li>
+                  <li>料理分類：{food.preference?.join?.('、')}</li>
+                  <li>推薦指數：{food.score} 顆星</li>
                 </ul>
               </div>
             </div>
@@ -120,6 +124,25 @@ export default function RecommendFood() {
           <p className="text-center mt-5">抱歉，找不到符合條件的料理。</p>
         )}
       </div>
-    </div>
+      <button
+        className="btn btn-primary w-100 text-center mt-4"
+        onClick={() => {
+          Swal.fire({
+            title: '確定要回到轉盤頁？',
+            text: '這會清除目前的推薦結果',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '確定要再懶一次',
+            cancelButtonText: '取消'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/');
+            }
+          });
+        }}
+      >
+        🔄 再懶一次
+      </button>
+    </div >
   );
 }
