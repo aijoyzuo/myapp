@@ -153,8 +153,9 @@ export default function RecommendMovie() {
           <div className="col-12 col-md-4">
             <TryAgainButton
               text="再懶一次"
+              textColor="text-white"
               buttonColor="#ca4231"
-              swalBackground="#ffe8e8"
+              swalBackground="#ffe8e8"        
               swalClass={{
                 confirmButton: 'btn btn-danger mx-2',
                 cancelButton: 'btn btn-outline-danger bg-white mx-2',

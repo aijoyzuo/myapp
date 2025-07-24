@@ -146,6 +146,7 @@ export default function RecommendFood() {
           <div className="col-12 col-md-4">
             <TryAgainButton
               text="再懶一次"
+              textColor="text-dark"
               buttonColor="#f6da85"
               swalBackground="#fffbe6"
               swalClass={{

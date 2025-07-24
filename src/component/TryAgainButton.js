@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function TryAgainButton({
   text = '再懶一次',
+  textColor='text-white',
   buttonColor = '#f6da85',
   swalBackground = '#fffbe6',
   swalClass = {
@@ -36,7 +37,7 @@ export default function TryAgainButton({
 
   return (
     <button
-      className="btn w-100 text-center mt-4 fs-6 fw-bold"
+      className={`btn w-100 text-center mt-4 fs-6 fw-bold ${textColor}`}
       style={{ backgroundColor: buttonColor }}
       onClick={handleClick}
     >
