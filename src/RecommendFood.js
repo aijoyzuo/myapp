@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import ShareButtons from "./component/ShareButtons";
+import RatingStars from "./component/RatingStars";
+import TryAgainButton from "./component/TryAgainButton";
 
 // ---------- 不同題型的 handler ----------
 function rangeHandler(item, answers) {
@@ -106,11 +108,11 @@ export default function RecommendFood() {
         <h5 className="m-0">懶惰吃貨的飲食推薦系統</h5>
       </header>
       <main className="flex-grow-1 py-5 mt-4">
-        <h2 className="text-center mb-4">🍽 根據你的選擇，我們推薦：</h2>
+        <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
         <div className="row">
           {recommended.map((food, index) => (
             <div key={food.id} className="col-md-4 mb-4 position-relative">
-              <div className="card h-100">
+              <div className="card h-100 fade-in-up">
                 <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end" style={{ backgroundColor: 'rgba(255, 193, 7, 0.7)' }}>
                   <i className="bi bi-award-fill me-1" />No.{index + 1}
                 </div>
@@ -123,7 +125,9 @@ export default function RecommendFood() {
                   <p className="card-text">{food.description}</p>
                   <ul className="list-unstyled small">
                     <li>料理分類：{food.preference?.join?.('、')}</li>
-                    <li>推薦指數：{food.score} 顆星</li>
+                    <li>
+                      推薦指數：<RatingStars score={food.score} />
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -134,36 +138,26 @@ export default function RecommendFood() {
           )}
         </div>
         <div className="row justify-content-center mt-4">
-          <div className="col-12 col-md-4">
-            <button
-              className="btn w-100 text-center mt-4"
-              style={{ backgroundColor: '#f6da85' }}
-              onClick={() => {
-                Swal.fire({
-                  title: '確定要回到轉盤頁？',
-                  text: '這會清除目前的推薦結果',
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonText: '確定',
-                  cancelButtonText: '取消',
-                  customClass: {
-                    confirmButton: 'btn btn-warning mx-2',
-                    cancelButton: 'btn btn-outline-secondary bg-white mx-2',
-                    actions: 'swal2-button-group-gap'
-                  },
-                  buttonsStyling: false, // 必須關閉原生 styling 才會套用上面的 class
-                  background: '#fffbe6'
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    navigate('/');
-                  }
-                });
-              }}
-            >
-              再懶一次
-            </button>
+          <div className="col-12 col-md-5">
+            <ShareButtons title="今天就吃這個吧！" />
           </div>
         </div>
+        <div className="row justify-content-center mt-4">
+          <div className="col-12 col-md-4">
+            <TryAgainButton
+              text="再懶一次"
+              buttonColor="#f6da85"
+              swalBackground="#fffbe6"
+              swalClass={{
+                confirmButton: 'btn btn-warning mx-2',
+                cancelButton: 'btn btn-outline-warning bg-white mx-2',
+                actions: 'swal2-button-group-gap'
+              }}
+              redirectPath="/"
+            />
+          </div>
+        </div>
+
       </main>
       <footer className="bg-dark text-white text-center py-3 fixed-bottom">
         <small>© {new Date().getFullYear()} All rights reserved.</small>

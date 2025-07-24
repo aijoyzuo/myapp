@@ -34,8 +34,7 @@
                         "id": "group",
                         "label": "多人"
                     }
-                ],
-                "weight": 2
+                ]
             },
             {
                 "id": "afterMovie",
@@ -73,7 +72,8 @@
                         "id": "high",
                         "label": "高於六分"
                     }
-                ]
+                ],
+                "weight": 3
             },
             {
                 "id": "language",
@@ -125,8 +125,8 @@
                         "label": "浪漫一波"
                     }
                 ],
-                "weight": 3
+                "weight": 2
             }
-        ]   
+        ]
     }
 }

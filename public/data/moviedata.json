@@ -633,7 +633,7 @@
         "家庭",
         "冒險"
       ],
-      "rating": true,
+      "rating": false,
       "answer": [
         {
           "id": "duration",
