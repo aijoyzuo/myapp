@@ -9,15 +9,21 @@ function rangeHandler(item, answers) {
   const userValue = answers[item.id];
   const classifyDuration = (minutes) => {
     if (minutes <= 60) return "short";
-    if (minutes <= 120) return "medium";
+    if (minutes <= 80) return "medium";
     return "long";
   };
   const userCategory = classifyDuration(userValue);
+  if (userCategory === 'medium') return 0;
+
   return userCategory === item.value ? 1 : 0;
 }
 
 function radioHandler(item, answers) {
   const userValue = answers[item.id];
+
+  // ✅ 若是「不限」，不計分
+  if (userValue === '不限') return 0;
+
   return item.value.includes(userValue) ? 1 : 0;
 }
 
@@ -114,18 +120,18 @@ export default function RecommendBook() {
                 <img src={book.image} className="card-img-top object-fit-cover" style={{ height: "250px", objectPosition: "center" }} alt={book.title} />
 
                 <div className="card-body">
-                  <div className="d-flex gap-2 align-items-center">
+                  <div className="d-flex gap-2">
                     <h5 className="card-title mb-0">{book.title}</h5>
+                    {book.rating === '限制級' && <div><p className="badge bg-danger text-white">{book.rating}</p></div>}
+                    {book.duration !=='一般篇幅' && <div><p className="badge bg-secondary text-white">{book.duration}</p></div>}
                   </div>
 
                   <p className="card-text">{book.description}</p>
                   <ul className="list-unstyled small">
                     <li>作者：{book.author}</li>
-                    <li>類型：{book.genre}</li>
+                    <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
                     <li>系列：{book.preference}</li>
-                    <li>語言：{book.language}</li>
-                    <li>閱讀情緒：{book.mood?.join?.("、")}</li>
-                    <li>閱讀時長：{book.duration}</li>
+                    <li>語言：{book.language}</li>                    
                     <li>配對分數：<RatingStars score={book.score} /></li>
                   </ul>
                 </div>
