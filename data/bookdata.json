@@ -6,15 +6,17 @@
       "author": "Ellen Raskin",
       "description": "經典的少年偵探小說，講述一群少年被捲入富翁遺產謎團中。",
       "image": "https://books.google.com.tw/books/publisher/content?id=CEy5DwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U3OAB2OAjp6tlpKN3J49ykSQca7bA&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -65,16 +67,16 @@
       "author": "Frances Hodgson Burnett",
       "description": "一個小女孩復甦神祕花園的療癒童話故事。",
       "image": "https://books.google.com.tw/books/content?id=9nbBwFzi0KcC&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U0Yv9CFxMWvxsrjtA_zkYWn4uNoSQ&w=1280",
-      "duration": "long",
-      "genre": "fiction",
+      "duration": "長篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "relaxing",
-        "emotional"
+        "放鬆",
+        "感動"
       ],
       "answer": [
         {
@@ -126,15 +128,16 @@
       "author": "Louis Sachar",
       "description": "一部融合懲罰與命運的少年冒險小說。",
       "image": "https://books.google.com.tw/books/publisher/content?id=zx5hDwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U0JAQX61agzycJvEGX0T38mIztGvg&w=1280",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "系列作",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險"
       ],
       "answer": [
         {
@@ -185,15 +188,18 @@
       "author": "Enid Blyton",
       "description": "「五位小偵探」系列首部，孩子們破解起火謎團。",
       "image": "https://books.google.com.tw/books/publisher/content?id=C9CAEAAAQBAJ&hl=zh-TW&pg=PA1&img=1&zoom=3&bul=1&sig=ACfU3U2lemJDFcZDgA9H3AgUaPuskayCHQ&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "系列作",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -244,15 +250,17 @@
       "author": "Rick Riordan",
       "description": "《39 线索》系列首部，尋找祖先的祕密遺產。",
       "image": "https://books.google.com.tw/books/publisher/content?id=4XluEAAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U3hdoflQ_TVXyJYLVwDSuMlCQal-A&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "系列作",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -303,15 +311,17 @@
       "author": "Carolyn Keene",
       "description": "南茜‧卓的首本偵探冒險，展開傳奇之旅。",
       "image": "https://books.google.com.tw/books/publisher/content?id=JgUTEAAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U2-7U70nknPHS6sqgf4hh4MfPIbAQ&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "系列作",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -362,16 +372,17 @@
       "author": "Eiko Kadono",
       "description": "魔女琪琪離家學習獨立飛行與生活的成長故事。",
       "image": "https://books.google.com.tw/books/publisher/content?id=8VvZDwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U2z6x30TJGMZhRC7dGPisQ0tkzzTQ&w=1280",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "japanese"
+        "日文"
       ],
       "mood": [
-        "relaxing",
-        "emotional"
+        "放鬆",
+        "感動",
+        "成長"
       ],
       "answer": [
         {
@@ -423,15 +434,16 @@
       "author": "—",
       "description": "四季園林裡的小故事與自然發現。",
       "image": "https://books.google.com.tw/books/content?id=Q9s7AQAAMAAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U2yPuM8wLaeojZWt7X3AGrDvGj9tQ&w=1025",
-      "duration": "short",
-      "genre": "fiction",
+      "duration": "短篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "japanese"
+        "日文"
       ],
       "mood": [
-        "relaxing"
+        "放鬆",
+        "自然"
       ],
       "answer": [
         {
@@ -482,15 +494,17 @@
       "author": "—",
       "description": "鼓勵孩子探索世界的互動繪本。",
       "image": "https://japanesebooks.jp/wp-content/uploads/2019/05/94ec6689ea71cb1862039e1f8f2985e5.jpg",
-      "duration": "short",
-      "genre": "fiction",
+      "duration": "短篇",
+      "genre": "小說",
       "preference": "系列作",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "japanese"
+        "日文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "放鬆",
+        "成長"
       ],
       "answer": [
         {
@@ -541,15 +555,17 @@
       "author": "Baek Hee‑na",
       "description": "貓咪兄妹製作會飛的雲朵麵包的溫馨故事。",
       "image": "https://m.media-amazon.com/images/I/51IwzG7599L._UX500_FMwebp_QL85_.jpg",
-      "duration": "short",
-      "genre": "fiction",
+      "duration": "短篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "korean"
+        "韓文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "放鬆",
+        "成長"
       ],
       "answer": [
         {
@@ -600,15 +616,16 @@
       "author": "Shel Silverstein",
       "description": "友情與無私奉獻的經典童話（首見韓文譯本）。",
       "image": "https://m.media-amazon.com/images/I/31FFs9uISFL.jpg",
-      "duration": "short",
-      "genre": "fiction",
+      "duration": "短篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "korean"
+        "韓文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "友情"
       ],
       "answer": [
         {
@@ -655,19 +672,21 @@
     },
     {
       "id": "book012",
-      "title": "三國演義 (簡體版)",
+      "title": "三國演義",
       "author": "羅貫中",
       "description": "中國四大名著之一，描述英雄割據三國的歷史。",
       "image": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/063/63/0010636391.jpg&v=5371f49dk&w=348&h=348",
-      "duration": "long",
-      "genre": "history",
+      "duration": "長篇",
+      "genre": "歷史",
       "preference": "系列作",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "歷史",
+        "經典"
       ],
       "answer": [
         {
@@ -718,15 +737,16 @@
       "author": "曹雪芹",
       "description": "中國古典文學巔峰，展現貴族家族興衰。",
       "image": "https://books.google.com.tw/books/publisher/content?id=Bs17DwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U0AAaHJdiN81_hjUzUhSn5VSKmUSg&w=1280",
-      "duration": "long",
-      "genre": "fiction",
+      "duration": "長篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "經典"
       ],
       "answer": [
         {
@@ -777,15 +797,16 @@
       "author": "張樂平",
       "description": "講述小畫家三毛的街頭生活冒險。",
       "image": "https://s.yimg.com/ob/image/6e64b6e5-29a4-4b52-8f14-c96315e1d45f.jpg",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "relaxing"
+        "放鬆",
+        "成長"
       ],
       "answer": [
         {
@@ -836,15 +857,17 @@
       "author": "沈石溪",
       "description": "以狼的視角寫成的動物寓言小說。",
       "image": "https://books.google.com.tw/books/publisher/content?id=oPUUCgAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1ndX0H78d6WJzaccQWT0Cd5MI_bA&w=1280",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "成長",
+        "自然"
       ],
       "answer": [
         {
@@ -895,15 +918,16 @@
       "author": "東野圭吾",
       "description": "神秘雜貨店幫助人們解開煩惱的故事。",
       "image": "https://upload.wikimedia.org/wikipedia/zh/2/2b/NAMIYA_ZAKKATEN_NO_KISEKI%28TW%29.jpg",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "japanese"
+        "日文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "成長"
       ],
       "answer": [
         {
@@ -954,15 +978,16 @@
       "author": "莊沛文",
       "description": "台灣兒童繪本，幽默教導分享與友誼。",
       "image": "https://ioveyi.tw/wp-content/uploads/20191119145625_45.jpg",
-      "duration": "short",
-      "genre": "fiction",
+      "duration": "短篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "友情"
       ],
       "answer": [
         {
@@ -1013,15 +1038,16 @@
       "author": "九把刀",
       "description": "臺灣作家九把刀多元短篇與青春小說合集。",
       "image": "https://books.google.com.tw/books/publisher/content?id=Vtr0DwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U3rhyQc8nigMTZdc439ic531b8luA&w=1280",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "系列作",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "mandarin"
+        "華文"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "青春"
       ],
       "answer": [
         {
@@ -1072,15 +1098,16 @@
       "author": "Jonathan Auxier",
       "description": "哥德式童話，孤兒兄妹與神祕雕像的故事。",
       "image": "https://books.google.com.tw/books/content?id=mKz52dDWxY4C&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U2C7-3tVdPeCT3EOKPfIp9yTWsr5w&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "限制級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險"
       ],
       "answer": [
         {
@@ -1106,7 +1133,7 @@
           "id": "rating",
           "type": "radio",
           "value": [
-            "general"
+            "restricted"
           ]
         },
         {
@@ -1131,15 +1158,17 @@
       "author": "Robin Stevens",
       "description": "1920年代的校園偵探推理系列第一本。",
       "image": "https://books.google.com.tw/books/publisher/content?id=Gbp1CwAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1c-TkuqgZQqDzL01ACMq1ZmuPc8w&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "系列作",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -1190,15 +1219,16 @@
       "author": "Jeremy Strong",
       "description": "溫馨青少年的成長與歷史融合故事。",
       "image": "https://img.pchome.com.tw/cs/items/DJBQD8D900HY043/000001_1728576348.jpg",
-      "duration": "long",
-      "genre": "fiction",
+      "duration": "長篇",
+      "genre": "小說",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "普遍級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "emotional"
+        "感動",
+        "成長"
       ],
       "answer": [
         {
@@ -1249,15 +1279,17 @@
       "author": "Mark Haddon",
       "description": "自閉少年偵測狗被刺的謎案，獨特敘事視角。",
       "image": "https://books.google.com.tw/books/content?id=loC0vNA1a4IC&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U3OS3_WvhEtboh6tcRglvGrFpxpWg&w=1280",
-      "duration": "medium",
-      "genre": "mystery",
+      "duration": "一般篇幅",
+      "genre": "懸疑",
       "preference": "單行本",
-      "rating": "general",
+      "rating": "限制級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險",
+        "解謎"
       ],
       "answer": [
         {
@@ -1283,7 +1315,7 @@
           "id": "rating",
           "type": "radio",
           "value": [
-            "general"
+            "restricted"
           ]
         },
         {
@@ -1308,15 +1340,17 @@
       "author": "M A Bennett",
       "description": "青少年系列，哥德風格校園驚悚故事。",
       "image": "https://books.google.com.tw/books/publisher/content?id=ncXjEAAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1P8p4ecasOtqkJc7JyS0wYwZrShg&w=1280",
-      "duration": "medium",
-      "genre": "fiction",
+      "duration": "一般篇幅",
+      "genre": "小說",
       "preference": "系列作",
-      "rating": "general",
+      "rating": "限制級",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "偵探",
+        "青春"
       ],
       "answer": [
         {
@@ -1342,7 +1376,7 @@
           "id": "rating",
           "type": "radio",
           "value": [
-            "general"
+            "restricted"
           ]
         },
         {
@@ -1367,15 +1401,17 @@
       "author": "P G Bell",
       "description": "結合童話與偵探的中年級懸疑小說。",
       "image": "https://books.google.com.tw/books/publisher/content?id=45YMEQAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U2U9wgv3KXWpceaYLVsho3LjuSHnw&w=1280",
-      "duration": "short",
-      "genre": "mystery",
+      "duration": "短篇",
+      "genre": "懸疑",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險",
+        "偵探"
       ],
       "answer": [
         {
@@ -1426,15 +1462,18 @@
       "author": "David Walliams",
       "description": "大衛·威廉姆斯最新兒童校園推理作品。",
       "image": "https://books.google.com.tw/books/publisher/content?id=s-4KEQAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U0i5JcNwvHQ_1i8SDx4Wx9Xz2v8tg&w=1280",
-      "duration": "short",
-      "genre": "mystery",
+      "duration": "短篇",
+      "genre": "懸疑",
       "preference": "單行本",
-      "rating": "child",
+      "rating": "兒童",
       "language": [
-        "western"
+        "歐美"
       ],
       "mood": [
-        "thrilling"
+        "刺激",
+        "冒險",
+        "偵探",
+        "解謎"
       ],
       "answer": [
         {
@@ -1475,6 +1514,316 @@
           "type": "checkbox",
           "value": [
             "thrilling"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "book026",
+      "title": "那些年，我們一起追的女孩",
+      "author": "九把刀",
+      "description": "一段令人懷念的青春戀曲，講述男孩追求女孩的成長故事。",
+      "image": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/033/33/0010333343.jpg&v=53d793f5k&w=348&h=348",
+      "duration": "中篇",
+      "genre": "romance",
+      "preference": "單行本",
+      "rating": "普遍級",
+      "language": [
+        "華文"
+      ],
+      "mood": [
+        "懷舊",
+        "青春",
+        "初戀",
+        "溫馨"
+      ],
+      "answer": [
+        {
+          "id": "duration",
+          "type": "range",
+          "value": "medium"
+        },
+        {
+          "id": "genre",
+          "type": "radio",
+          "value": [
+            "fiction"
+          ]
+        },
+        {
+          "id": "preference",
+          "type": "radio",
+          "value": [
+            "standalone"
+          ]
+        },
+        {
+          "id": "rating",
+          "type": "radio",
+          "value": [
+            "general"
+          ]
+        },
+        {
+          "id": "language",
+          "type": "checkbox",
+          "value": [
+            "chinese"
+          ]
+        },
+        {
+          "id": "mood",
+          "type": "checkbox",
+          "value": [
+            "emotional"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "book027",
+      "title": "我在未來等你",
+      "author": "劉同",
+      "description": "一場穿越時空的青春對話，少年與未來的自己一同尋找遺失的勇氣與愛。",
+      "image": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/090/35/0010903549.jpg&v=6141cb6ak&w=348&h=348",
+      "duration": "長篇",
+      "genre": "romance",
+      "preference": "單行本",
+      "rating": "普遍級",
+      "language": [
+        "華文"
+      ],
+      "mood": [
+        "感人",
+        "勵志",
+        "浪漫",
+        "青春"
+      ],
+      "answer": [
+        {
+          "id": "duration",
+          "type": "range",
+          "value": "long"
+        },
+        {
+          "id": "genre",
+          "type": "radio",
+          "value": [
+            "fiction"
+          ]
+        },
+        {
+          "id": "preference",
+          "type": "radio",
+          "value": [
+            "standalone"
+          ]
+        },
+        {
+          "id": "rating",
+          "type": "radio",
+          "value": [
+            "general"
+          ]
+        },
+        {
+          "id": "language",
+          "type": "checkbox",
+          "value": [
+            "chinese"
+          ]
+        },
+        {
+          "id": "mood",
+          "type": "checkbox",
+          "value": [
+            "romantic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "book028",
+      "title": "可不可以，你也剛好喜歡我",
+      "author": "肆一",
+      "description": "那些不曾說出口的愛，那些錯過與等待，拼湊出青春的模樣。",
+      "image": "https://upload.wikimedia.org/wikipedia/zh/thumb/3/37/%E5%8F%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%BD%A0%E4%B9%9F%E5%89%9B%E5%A5%BD%E5%96%9C%E6%AD%A1%E6%88%91.jpg/250px-%E5%8F%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%BD%A0%E4%B9%9F%E5%89%9B%E5%A5%BD%E5%96%9C%E6%AD%A1%E6%88%91.jpg",
+      "duration": "短篇",
+      "genre": "romance",
+      "preference": "單行本",
+      "rating": "普遍級",
+      "language": [
+        "華文"
+      ],
+      "mood": [
+        "憂傷",
+        "細膩",
+        "青春",
+        "抒情"
+      ],
+      "answer": [
+        {
+          "id": "duration",
+          "type": "range",
+          "value": "short"
+        },
+        {
+          "id": "genre",
+          "type": "radio",
+          "value": [
+            "fiction"
+          ]
+        },
+        {
+          "id": "preference",
+          "type": "radio",
+          "value": [
+            "standalone"
+          ]
+        },
+        {
+          "id": "rating",
+          "type": "radio",
+          "value": [
+            "general"
+          ]
+        },
+        {
+          "id": "language",
+          "type": "checkbox",
+          "value": [
+            "chinese"
+          ]
+        },
+        {
+          "id": "mood",
+          "type": "checkbox",
+          "value": [
+            "emotional"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "book029",
+      "title": "等一個人咖啡",
+      "author": "九把刀",
+      "description": "在咖啡店裡的打工歲月，遇見了不一樣的她，青春與愛情悄然萌芽。",
+      "image": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/091/31/0010913107_bc_01.jpg&v=61c9a3e9k&w=348&h=348",
+      "duration": "中篇",
+      "genre": "romance",
+      "preference": "單行本",
+      "rating": "普遍級",
+      "language": [
+        "華文"
+      ],
+      "mood": [
+        "療癒",
+        "溫暖",
+        "浪漫",
+        "青春"
+      ],
+      "answer": [
+        {
+          "id": "duration",
+          "type": "range",
+          "value": "medium"
+        },
+        {
+          "id": "genre",
+          "type": "radio",
+          "value": [
+            "fiction"
+          ]
+        },
+        {
+          "id": "preference",
+          "type": "radio",
+          "value": [
+            "standalone"
+          ]
+        },
+        {
+          "id": "rating",
+          "type": "radio",
+          "value": [
+            "general"
+          ]
+        },
+        {
+          "id": "language",
+          "type": "checkbox",
+          "value": [
+            "chinese"
+          ]
+        },
+        {
+          "id": "mood",
+          "type": "checkbox",
+          "value": [            
+            "emotional"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "book030",
+      "title": "以你的名字呼喚我",
+      "author": "安德烈·艾席蒙（中譯：李靜宜）",
+      "description": "跨越語言與文化的青春戀情，細膩描繪少年初戀的情愫與掙扎。",
+      "image": "https://pic.pimg.tw/emilee2216/1517470689-2125367219_n.jpg",
+      "duration": "長篇",
+      "genre": "romance",
+      "preference": "單行本",
+      "rating": "普遍級",
+      "language": [
+        "歐美"
+      ],
+      "mood": [
+        "細膩",
+        "情感",
+        "探索",
+        "青春"
+      ],
+      "answer": [
+        {
+          "id": "duration",
+          "type": "range",
+          "value": "long"
+        },
+        {
+          "id": "genre",
+          "type": "radio",
+          "value": [
+            "fiction"
+          ]
+        },
+        {
+          "id": "preference",
+          "type": "radio",
+          "value": [
+            "standalone"
+          ]
+        },
+        {
+          "id": "rating",
+          "type": "radio",
+          "value": [
+            "general"
+          ]
+        },
+        {
+          "id": "language",
+          "type": "checkbox",
+          "value": [
+            "westen"
+          ]
+        },
+        {
+          "id": "mood",
+          "type": "checkbox",
+          "value": [
+            "emotional"
           ]
         }
       ]
