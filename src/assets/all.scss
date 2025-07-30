@@ -1,9 +1,9 @@
 @import "bootstrap/scss/functions";//為了將bootstrap的變數移為己用
 @import "./variables";//從node裡面移出來的bootstrap變數設定檔
 @import "bootstrap/scss/bootstrap";
-@import "homepage";
 @import "quiz";
 @import "recommend";
+@import "wheel";
 body {
   font-family: sans-serif;
 }

@@ -1,54 +1,109 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Film, Book, CupHot } from 'react-bootstrap-icons';
 
 export default function HomePage() {
+  // 路由鍵
   const options = ['movie', 'book', 'food'];
+  // 顯示標籤（順序要對上）
+  const labels = ['看電影', '看點書', '吃東西'];
+  // Icon（可換成圖片）
+  const icons = [
+    <Film aria-hidden="true" />,
+    <Book aria-hidden="true" />,
+    <CupHot aria-hidden="true" />
+  ];
+
   const navigate = useNavigate();
+  const [rotation, setRotation] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(false);
 
-  const [rotation, setRotation] = useState(0);// 當前累積轉盤角度（從 0 開始）
-  const [isSpinning, setIsSpinning] = useState(false);// 控制是否正在轉動，避免連續點擊
+  const sectorAngle = 120; // 三等分
+  const pointerAngle = 90;  // 指針在下方（6 點鐘）→ 90°
 
-  const spinWheel = () => {// 點擊「開始轉盤」時呼叫的函式,
-    if (isSpinning) return;//如果isSpinning=true，表示正在轉動中ㄝ，就直接return不能重複按
+  const spinWheel = () => {
+    if (isSpinning) return;
     setIsSpinning(true);
 
-    const randomIndex = Math.floor(Math.random() * options.length); //Math.floor()無條件捨去小數點，Math.random()產生0~1的隨機數，options.length陣列長度，用來決定隨機範圍
-    const chosen = options[randomIndex];// 對應的項目文字（例如 'movie'）
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const chosen = options[randomIndex];
 
-    const baseRotation = 360 * 5; // 設定基本旋轉為 5 圈（360° × 5 = 1800°）
-    const sectorAngle = 120;// 每個選項佔 120 度（360 ÷ 3 = 120）
-    const centerOffset = 0; // 指針在轉盤下方
-    const targetAngle = randomIndex * sectorAngle + centerOffset; // 計算目標角度（從原點開始的角度），使選項的中心對準指針
+    // 讓第 i 塊中心對到下方指針
+    const targetAngle = pointerAngle - randomIndex * sectorAngle; // 90 - i*120
+    const baseRotation = 360 * 5;
+    const randomWiggle = Math.random() * 10 - 5; // ±5° 自然感
+    const newRotation = rotation + baseRotation + targetAngle + randomWiggle;
 
-    const randomWiggle = Math.random() * 10 - 5; // 增加隨機的誤差（±5 度），讓轉動看起來更自然(先產生一個0~1的隨機數，再放大十倍，再減掉五)
-    const newRotation = rotation + baseRotation + targetAngle + randomWiggle;// 新的總旋轉角度是從上一次停止的位置繼續加上新的轉動
+    setRotation(newRotation);
 
-    setRotation(newRotation);// 更新畫面中的旋轉角度
-
-    console.log(`Selected: ${chosen}, Final rotation: ${newRotation.toFixed(2)}°`);// 記錄選擇結果與旋轉角度用
-
-    setTimeout(() => {// 等待轉盤轉完後再跳轉頁面（和 CSS transition 對應）
-      navigate(`/quiz/${chosen}`);// 導向對應的測驗頁面
-      setIsSpinning(false); // 解鎖再次轉動
+    setTimeout(() => {
+      navigate(`/quiz/${chosen}`);
+      setIsSpinning(false);
     }, 3500);
   };
 
   return (
-    <div className="homepage">
-      <h1>懶人轉盤</h1>
-      <p>今日你要做什麼?</p>
-
-      <div className="wheel" style={{ transform: `rotate(${rotation}deg)` }}> 
-        <div className="wheel-label label-0">書籍</div>
-        <div className="wheel-label label-1">電影</div>
-        <div className="wheel-label label-2">食物</div>
+    <div className="wheel-page">
+      {/* 你的標題會正常顯示，不會被覆蓋 */}
+      <div className="page-head">
+        <h1 className="title">懶人救星</h1>
+        <p className="subtitle">「啊接下來要幹嘛?」</p>
       </div>
 
-      <div className="pointer"></div>
+      <div className="box">
+        <div className="bgImg">
+          <img src="https://img.onl/PLp9ZJ" alt="" />
 
-      <button className="start-btn" onClick={spinWheel}>
-        開始轉盤
-      </button>
+          {/* 真正旋轉的容器 */}
+          <div
+            className="wheel"
+            style={{ transform: `rotate(${rotation}deg)` }}
+            aria-label="轉盤"
+          >
+            {/* 底層：扇形色塊（不放文字，避免互蓋） */}
+            <div className="sectors">
+              {labels.map((_, i) => (
+                <div
+                  className="sector"
+                  key={`sector-${i}`}
+                  style={{ transform: `translate(-50%, -50%) rotate(${i * sectorAngle}deg)` }}
+                />
+              ))}
+            </div>
+
+            {/* 上層：標籤（圖示＋文字） */}
+            <div className="labels">
+              {labels.map((text, i) => (
+                <div
+                  className="labelBlock"
+                  key={`label-${i}`}
+                  style={{
+                    // 圓心 → 旋轉到該扇形 → 沿中心線推出去（半徑可在 SCSS 調）
+                    transform: `translate(-50%, -50%) rotate(${i * sectorAngle}deg) translate(var(--labelRadius), 0)`
+                  }}
+                >
+                  <span className="icon" aria-hidden="true">{icons[i]}</span>
+                  {/* 只有「食物」直排，其它仍橫排；想全部直排可把條件移掉 */}
+                  <span className={`label ${text === '食物' ? 'vertical' : ''}`}>{text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 覆蓋在轉盤上的互動層：中央按鈕＋下方指針 */}
+        <div className="overlay">
+          <button
+            className="centerText"
+            onClick={spinWheel}
+            disabled={isSpinning}
+            aria-label="開始轉盤"
+          >
+            PRESS
+          </button>
+          <div className="arrowIcon" />
+        </div>
+      </div>
     </div>
   );
 }

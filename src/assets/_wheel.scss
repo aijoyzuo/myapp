@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:100,300,400,500,700,900");
+
+:root{
+  --darkPurple:#5858B9;
+  --lightBlue:#343BAA;
+  --darkBlue:#1F1172;
+  --pink:#F0BEFF;
+  --lightPurplrRed:#FF00BA;
+
+  /* 可調參數 */
+  --labelRadius: 155px;  /* 標籤離圓心距離 */
+  --iconSize:    48px;
+  --labelSize:   24px;
+}
+
+.wheel-page{
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;          /* 讓上方 h1/p 與轉盤垂直排列 */
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--darkPurple);
+  font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+.page-head .title{
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+}
+.page-head .subtitle{
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  opacity: .9;
+}
+
+/* 轉盤外框（正方形） */
+.box{
+  width: 540px;
+  height: 540px;
+  position: relative;
+  border-radius: 50%;
+}
+
+/* 背景容器與圖片 */
+.box .bgImg{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+.box .bgImg > img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* 旋轉容器 */
+.box .bgImg .wheel{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 3s ease-in-out;
+}
+
+/* === 底層：扇形色塊（不要放文字，避免互蓋） === */
+.box .bgImg .wheel .sectors{
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* 低於 labels */
+}
+.box .bgImg .wheel .sectors .sector{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 540px;
+  height: 540px;
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%); /* 右半圓 */
+  transform-origin: center;
+  overflow: hidden;
+}
+.box .bgImg .wheel .sectors .sector::before{
+  content: "";
+  width: 270px;
+  height: 540px;
+  position: absolute;
+  transform-origin: right center;
+  transform: rotate(120deg);
+}
+
+
+/* === 上層：標籤（圖示＋文字） === */
+.box .bgImg .wheel .labels{
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* 高於 sectors */
+  pointer-events: none; /* 不攔截滑鼠，讓中央按鈕可點 */
+}
+.box .bgImg .wheel .labels .labelBlock{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  color: var(--lightBlue);
+}
+.box .bgImg .wheel .labels .labelBlock:nth-child(even){
+  color: var(--pink);
+}
+
+.box .bgImg .wheel .labels .icon{
+  font-size: var(--iconSize);
+  line-height: 1;
+}
+.box .bgImg .wheel .labels .label{
+  font-size: var(--labelSize);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: .5px;
+}
+
+/* 只有「食物」直排（要全部直排就把選擇器寫成 .label 直接套用即可） */
+.box .bgImg .wheel .labels .label.vertical{
+  writing-mode: vertical-rl;  /* 垂直排版（右到左） */
+  text-orientation: upright;  /* 漢字直立 */
+}
+
+/* 覆蓋在轉盤上的互動層：中央按鈕 + 下方指針 */
+.box .overlay{
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none; /* 讓整層不攔截，僅中央按鈕可點 */
+}
+
+/* 中央按鈕 */
+.box .overlay .centerText{
+  pointer-events: auto;
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 0;
+  background-color: var(--darkBlue);
+  color: var(--lightPurplrRed);
+  font-weight: 900;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+.box .overlay .centerText:hover{
+  color: var(--pink);
+  background-color: var(--lightPurplrRed);
+}
+.box .overlay .centerText:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* 下方指針（朝上） */
+.box .overlay .arrowIcon{
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 28px solid #fff; /* ▲ 朝上 */
+  margin-bottom: 6px;
+}
+
+
+:root{
+  --labelRadius: 155px;
+  --iconSize: 48px;
+  --labelSize: 24px;
+}
+
+/* ...其餘維持你現在的 wheel.scss... */
+
+/* icon 大小（方案 A / B 都通用） */
+.box .bgImg .wheel .labels .icon{
+  width: var(--iconSize);
+  height: var(--iconSize);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 針對 react-bootstrap-icons（SVG）確保填滿容器並跟隨 color */
+.box .bgImg .wheel .labels .icon svg{
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+}
