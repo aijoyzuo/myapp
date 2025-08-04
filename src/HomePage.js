@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Film, Book, CupHot } from 'react-bootstrap-icons';
 
 export default function HomePage() {
@@ -17,6 +17,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const sectorAngle = 120; // 三等分
   const pointerAngle = 90;  // 指針在下方（6 點鐘）→ 90°
@@ -42,17 +43,24 @@ export default function HomePage() {
     }, 3500);
   };
 
+  useEffect(() => {
+  const t = setTimeout(() => setLoaded(true), 100);
+  return () => clearTimeout(t);
+}, []);
+
   return (
     <div className="wheel-page">
+      <div className="bgOverlay" />
       {/* 你的標題會正常顯示，不會被覆蓋 */}
       <div className="page-head">
         <h1 className="title">懶人救星</h1>
         <p className="subtitle">「啊接下來要幹嘛?」</p>
       </div>
 
-      <div className="box">
+      <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
+         <div className="wheel-background" />
         <div className="bgImg">
-          <img src="https://img.onl/PLp9ZJ" alt="" />
+          <img src="https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg" alt="bgimage" />
 
           {/* 真正旋轉的容器 */}
           <div
@@ -78,13 +86,17 @@ export default function HomePage() {
                   className="labelBlock"
                   key={`label-${i}`}
                   style={{
-                    // 圓心 → 旋轉到該扇形 → 沿中心線推出去（半徑可在 SCSS 調）
-                    transform: `translate(-50%, -50%) rotate(${i * sectorAngle}deg) translate(var(--labelRadius), 0)`
+                    transform: `
+      translate(-50%, -50%) 
+      rotate(${i * sectorAngle - sectorAngle /6 }deg)
+      translate(var(--labelRadius), 0) 
+      rotate(80deg)
+      translate(-50%, -20%)
+    `
                   }}
                 >
                   <span className="icon" aria-hidden="true">{icons[i]}</span>
-                  {/* 只有「食物」直排，其它仍橫排；想全部直排可把條件移掉 */}
-                  <span className={`label ${text === '食物' ? 'vertical' : ''}`}>{text}</span>
+                  <span className={`label ${labels[i] === '食物' ? 'vertical' : ''}`}>{labels[i]}</span>
                 </div>
               ))}
             </div>
