@@ -49,8 +49,7 @@ export default function HomePage() {
 }, []);
 
   return (
-    <div className="wheel-page">
-      <div className="bgOverlay" />
+    <div className="wheel-page">      
       {/* 你的標題會正常顯示，不會被覆蓋 */}
       <div className="page-head">
         <h1 className="title">懶人救星</h1>
@@ -60,6 +59,7 @@ export default function HomePage() {
       <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
          <div className="wheel-background" />
         <div className="bgImg">
+          
           <img src="https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg" alt="bgimage" />
 
           {/* 真正旋轉的容器 */}

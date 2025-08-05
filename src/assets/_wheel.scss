@@ -14,6 +14,20 @@
   --labelSize: 24px;
 }
 
+h1.title{
+  color:var(--darkBlue) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle{
+  color:var(--lightBlue) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.page-head {
+  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+}
+
 .wheel-page {
   //整體顏色
   background-image: url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
@@ -30,15 +44,21 @@
   gap: 16px;
   //background-color: var(--darkPurple);
   font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    /* 加入背景圖＋半透明疊層 */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+    url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.bgOverlay {
+/*.bgOverlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.8); /* 白色半透明遮罩 */
+  background-color: rgba(255, 255, 255, 0.8); 白色半透明遮罩 
   pointer-events: none;
   z-index: 0;
-}
+}*/
 
 /*背景動畫*/
 @keyframes floatIn {
@@ -309,4 +329,40 @@
   border-radius: 50%;
   background-color: #fff; /* 你想要的底色，可改 */
   z-index: 0; /* 確保在 bgImg 底下 */
+}
+
+
+/* 手機版調整（螢幕寬度小於 768px 時） */
+@media (max-width: 768px) {
+  :root {
+    --labelRadius: 100px;   /* 標籤內縮 */
+    --iconSize: 32px;       /* icon 縮小 */
+    --labelSize: 16px;      /* label 字體縮小 */
+  }
+
+  .box {
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .overlay .centerText {
+    width: 70px;
+    height: 70px;
+    font-size: 18px;
+  }
+
+  .box .overlay .arrowIcon {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #fff;
+    margin-bottom: 4px;
+  }
+
+  .page-head .title {
+    font-size: 24px;
+  }
+
+  .page-head .subtitle {
+    font-size: 14px;
+  }
 }
