@@ -44,78 +44,82 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-  const t = setTimeout(() => setLoaded(true), 100);
-  return () => clearTimeout(t);
-}, []);
+    const t = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <div className="wheel-page">      
-      {/* 你的標題會正常顯示，不會被覆蓋 */}
-      <div className="page-head">
-        <h1 className="title">懶人救星</h1>
-        <p className="subtitle">「啊接下來要幹嘛?」</p>
-      </div>
+    <>
+      <div className="py-5">
+        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: "#FF00BA" }}>
+          <h1 className="title">懶人救星</h1>
+        </header>
+        <div className="wheel-page">
+          <div className="info text-center p-4 mb-3">
+            <p className="mb-0">實在是懶得想也沒力氣想了</p>
+            <p className="mb-0">試試給懶人的活動推薦系統！</p>
+          </div>          
+          <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
+            <div className="wheel-background" />
+            <div className="bgImg">
+              {/* 旋轉的容器 */}
+              <div
+                className="wheel"
+                style={{ transform: `rotate(${rotation}deg)` }}
+                aria-label="轉盤"
+              >
+                {/* 底層：扇形色塊（不放文字，避免互蓋） */}
+                <div className="sectors">
+                  {labels.map((_, i) => (
+                    <div
+                      className="sector"
+                      key={`sector-${i}`}
+                      style={{ transform: `translate(-50%, -50%) rotate(${i * sectorAngle}deg)` }}
+                    />
+                  ))}
+                </div>
 
-      <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
-         <div className="wheel-background" />
-        <div className="bgImg">
-          
-          <img src="https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg" alt="bgimage" />
-
-          {/* 真正旋轉的容器 */}
-          <div
-            className="wheel"
-            style={{ transform: `rotate(${rotation}deg)` }}
-            aria-label="轉盤"
-          >
-            {/* 底層：扇形色塊（不放文字，避免互蓋） */}
-            <div className="sectors">
-              {labels.map((_, i) => (
-                <div
-                  className="sector"
-                  key={`sector-${i}`}
-                  style={{ transform: `translate(-50%, -50%) rotate(${i * sectorAngle}deg)` }}
-                />
-              ))}
-            </div>
-
-            {/* 上層：標籤（圖示＋文字） */}
-            <div className="labels">
-              {labels.map((text, i) => (
-                <div
-                  className="labelBlock"
-                  key={`label-${i}`}
-                  style={{
-                    transform: `
+                {/* 上層：標籤（圖示＋文字） */}
+                <div className="labels">
+                  {labels.map((text, i) => (
+                    <div
+                      className="labelBlock"
+                      key={`label-${i}`}
+                      style={{
+                        transform: `
       translate(-50%, -50%) 
-      rotate(${i * sectorAngle - sectorAngle /6 }deg)
+      rotate(${i * sectorAngle - sectorAngle / 6}deg)
       translate(var(--labelRadius), 0) 
       rotate(80deg)
       translate(-50%, -20%)
     `
-                  }}
-                >
-                  <span className="icon" aria-hidden="true">{icons[i]}</span>
-                  <span className={`label ${labels[i] === '食物' ? 'vertical' : ''}`}>{labels[i]}</span>
+                      }}
+                    >
+                      <span className="icon" aria-hidden="true">{icons[i]}</span>
+                      <span className={`label ${labels[i] === '食物' ? 'vertical' : ''}`}>{labels[i]}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* 覆蓋在轉盤上的互動層：中央按鈕＋下方指針 */}
-        <div className="overlay">
-          <button
-            className="centerText"
-            onClick={spinWheel}
-            disabled={isSpinning}
-            aria-label="開始轉盤"
-          >
-            PRESS
-          </button>
-          <div className="arrowIcon" />
+            {/* 覆蓋在轉盤上的互動層：中央按鈕＋下方指針 */}
+            <div className="overlay">
+              <button
+                className="centerText"
+                onClick={spinWheel}
+                disabled={isSpinning}
+                aria-label="開始轉盤"
+              >
+                PRESS
+              </button>
+              <div className="arrowIcon" />
+            </div>
+          </div>      
         </div>
+        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: "#FF00BA" }}>
+          <small>© {new Date().getFullYear()} All rights reserved.</small>
+        </footer>
       </div>
-    </div>
-  );
+    </>);
 }

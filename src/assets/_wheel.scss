@@ -2,7 +2,7 @@
 
 :root {
   --darkPurple: #ffdadc;
-  --lightBlue: #343BAA;
+  --lightBlue: rgb(52, 59, 170);
   --darkBlue: #1F1172;
   --pink: #F0BEFF;
   --lightPurplrRed: #FF00BA;
@@ -14,14 +14,21 @@
   --labelSize: 24px;
 }
 
-h1.title{
-  color:var(--darkBlue) !important;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+body {
+  font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
-.subtitle{
-  color:var(--lightBlue) !important;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+
+.info {
+  color: #fff !important;
+  font-size: 1rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+  max-width: 600px;
+  background-color: rgb(52, 59, 170, 0.9);
+  border-radius: 12px;
+  font-family:"Roboto Condensed";
 }
 
 .page-head {
@@ -35,7 +42,7 @@ h1.title{
   background-position: center;
   position: relative;
   overflow: hidden;
-  min-height: 100svh;
+  height: calc(100vh - 112px); /* ✅ 中間空間剛好 */
   display: flex;
   flex-direction: column;
   /* 讓上方 h1/p 與轉盤垂直排列 */
@@ -284,13 +291,13 @@ h1.title{
   pointer-events: none;
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -20px;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 28px solid #fff;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #FF00BA !important;
   /* ▲ 朝上 */
   margin-bottom: 6px;
 }
@@ -326,14 +333,14 @@ h1.title{
   left: -4px;
   width: calc(100% + 8px);
   height: calc(100% + 8px);
-  border-radius: 50%;
-  background-color: #fff; /* 你想要的底色，可改 */
+  border-radius: 90%;
+  background-color: #FF00BA; 
   z-index: 0; /* 確保在 bgImg 底下 */
 }
 
 
-/* 手機版調整（螢幕寬度小於 768px 時） */
-@media (max-width: 768px) {
+/* 手機版調整（螢幕寬度小於 570px 時） */
+@media (max-width: 570px) {
   :root {
     --labelRadius: 100px;   /* 標籤內縮 */
     --iconSize: 32px;       /* icon 縮小 */
@@ -341,21 +348,14 @@ h1.title{
   }
 
   .box {
-    width: 300px;
-    height: 300px;
+    width: 360px;
+    height: 360px;
   }
 
   .box .overlay .centerText {
     width: 70px;
     height: 70px;
     font-size: 18px;
-  }
-
-  .box .overlay .arrowIcon {
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid #fff;
-    margin-bottom: 4px;
   }
 
   .page-head .title {
