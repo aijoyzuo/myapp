@@ -24,49 +24,58 @@ export default function HomePage() {
 
   const spinWheel = () => {
     if (isSpinning) return;
-    setIsSpinning(true);
+
+    setIsSpinning(true); // 1️⃣ 先移除 slow-spin class（讓動畫停止）
 
     const randomIndex = Math.floor(Math.random() * options.length);
     const chosen = options[randomIndex];
 
-    // 讓第 i 塊中心對到下方指針
-    const targetAngle = pointerAngle - randomIndex * sectorAngle; // 90 - i*120
+    const targetAngle = pointerAngle - randomIndex * sectorAngle;
     const baseRotation = 360 * 5;
-    const randomWiggle = Math.random() * 10 - 5; // ±5° 自然感
+    const randomWiggle = Math.random() * 10 - 5;
     const newRotation = rotation + baseRotation + targetAngle + randomWiggle;
 
-    setRotation(newRotation);
+    // 2️⃣ 等動畫解除，再觸發快速轉（下一輪事件迴圈）
+    setTimeout(() => {
+      setRotation(newRotation);
+    }, 50); // 你可以調整成 10～100ms 都可以
 
     setTimeout(() => {
       navigate(`/quiz/${chosen}`);
-      setIsSpinning(false);
+      setIsSpinning(false); // 如果你之後要重新 spin 再慢轉
     }, 3500);
   };
+
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 100);
     return () => clearTimeout(t);
   }, []);
 
+
+
+
   return (
     <>
       <div className="py-5">
-        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: 'var(--pink)'}}>
+        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: 'var(--pink)' }}>
           <h1 className="title">懶人救星</h1>
         </header>
         <div className="wheel-page">
           <div className="info text-center p-4 mb-3">
             <p className="mb-1">懶人今天怎麼過</p>
             <p className="mb-0">試試給懶人的活動推薦系統！</p>
-          </div>          
+          </div>
           <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
             <div className="wheel-background" />
             <div className="bgImg">
               {/* 旋轉的容器 */}
               <div
-                className="wheel"
-                style={{ transform: `rotate(${rotation}deg)` }}
-                aria-label="轉盤"
+                className={`wheel ${!isSpinning ? 'slow-spin' : ''}`}
+                style={{
+                  transform: `rotate(${rotation}deg)`,
+                  transition: isSpinning ? 'transform 3.5s cubic-bezier(0.33, 1, 0.68, 1)' : 'none'
+                }}
               >
                 {/* 底層：扇形色塊（不放文字，避免互蓋） */}
                 <div className="sectors">
@@ -115,9 +124,9 @@ export default function HomePage() {
               </button>
               <div className="arrowIcon" />
             </div>
-          </div>      
+          </div>
         </div>
-        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: 'var(--pink)'}}>
+        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: 'var(--pink)' }}>
           <small>© {new Date().getFullYear()} All rights reserved.</small>
         </footer>
       </div>

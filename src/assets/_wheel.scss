@@ -140,6 +140,16 @@ body {
   transition: transform 3s ease-in-out;
 }
 
+.wheel {
+  animation: none; /* 預設無動畫 */
+}
+
+
+/*讓轉盤自動轉動*/
+.wheel.slow-spin {
+  animation: slowSpin 20s linear infinite;
+}
+
 /* === 底層：扇形色塊（不要放文字，避免互蓋） === */
 .box .bgImg .wheel .sectors {
   position: absolute;
@@ -413,4 +423,13 @@ body {
 
   /* 加入動畫 */
   animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes slowSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
