@@ -51,12 +51,12 @@ export default function HomePage() {
   return (
     <>
       <div className="py-5">
-        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: "#FF00BA" }}>
+        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: 'var(--pink)'}}>
           <h1 className="title">懶人救星</h1>
         </header>
         <div className="wheel-page">
           <div className="info text-center p-4 mb-3">
-            <p className="mb-0">實在是懶得想也沒力氣想了</p>
+            <p className="mb-1">懶人今天怎麼過</p>
             <p className="mb-0">試試給懶人的活動推薦系統！</p>
           </div>          
           <div className={`box ${loaded ? 'wheel-fadein' : ''}`}>
@@ -117,7 +117,7 @@ export default function HomePage() {
             </div>
           </div>      
         </div>
-        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: "#FF00BA" }}>
+        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: 'var(--pink)'}}>
           <small>© {new Date().getFullYear()} All rights reserved.</small>
         </footer>
       </div>
