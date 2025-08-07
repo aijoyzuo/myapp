@@ -58,8 +58,8 @@ export default function HomePage() {
   return (
     <>
       <div className="py-5">
-        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: 'var(--pink)' }}>
-          <h1 className="title">懶人救星</h1>
+        <header className="text-center py-3 shadow-sm fixed-top" style={{ color:'var(--darkBlue)',backgroundColor: 'var(--pink)' }}>
+          <h1 className="title mb-0">懶人救星</h1>
         </header>
         <div className="wheel-page">
           <div className="info text-center p-4 mb-3">
@@ -122,7 +122,11 @@ export default function HomePage() {
               >
                 PRESS
               </button>
-              <div className="arrowIcon" />
+              <img
+                src={`${process.env.PUBLIC_URL}/images/pointer.png`}
+                alt="指針"
+                className="arrowIcon"
+              />
             </div>
           </div>
         </div>

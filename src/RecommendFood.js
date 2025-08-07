@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ShareButtons from "./component/ShareButtons";
 import RatingStars from "./component/RatingStars";
 import TryAgainButton from "./component/TryAgainButton";
+import LoadingOverlay from "./component/LoadingOverlay";
 
 // ---------- 不同題型的 handler ----------
 function rangeHandler(item, answers) {
@@ -64,6 +65,13 @@ export default function RecommendFood() {
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     if (!answers) {
@@ -103,6 +111,9 @@ export default function RecommendFood() {
   if (!answers) return null;
 
   return (
+    <>
+    <LoadingOverlay show={loading} text="推薦生成中..." />
+     {!loading && (
     <div className="container py-5">
       <header className="text-center py-3 shadow-sm fixed-top" style={{ backgroundColor: '#f6da85' }}>
         <h5 className="m-0">懶惰吃貨的飲食推薦系統</h5>
@@ -164,5 +175,7 @@ export default function RecommendFood() {
         <small>© {new Date().getFullYear()} All rights reserved.</small>
       </footer>
     </div >
+     )}
+     </>
   );
 }

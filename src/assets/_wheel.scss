@@ -1,3 +1,4 @@
+/* ====== 全域設定 ====== */
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:100,300,400,500,700,900");
 
 :root {
@@ -7,9 +8,7 @@
   --pink: rgb(255, 199, 161);
   --lightPurplrRed: #ffebd4;
 
-  /* 可調參數 */
   --labelRadius: 155px;
-  /* 標籤離圓心距離 */
   --iconSize: 48px;
   --labelSize: 24px;
 }
@@ -18,57 +17,21 @@ body {
   font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
-
-
-.info {
-  color: var(--darkBlue) !important;
-  font-size: 1rem;
-  margin-top: 1rem;
-  line-height: 1.5;
-  max-width: 600px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  font-family:"Roboto Condensed";
-  font-weight: 500;
+/* ====== 動畫區 ====== */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(5px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
-.page-head {
-  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.3));
-}
-
-.wheel-page {
-  //整體顏色
-  background-image: url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-  height: calc(100vh - 112px); /* ✅ 中間空間剛好 */
-  display: flex;
-  flex-direction: column;
-  /* 讓上方 h1/p 與轉盤垂直排列 */
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  //background-color: var(--darkPurple);
-  font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-    /* 加入背景圖＋半透明疊層 */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-    url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-/*.bgOverlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.8); 白色半透明遮罩 
-  pointer-events: none;
-  z-index: 0;
-}*/
-
-/*背景動畫*/
 @keyframes floatIn {
   from {
     opacity: 0;
@@ -80,10 +43,60 @@ body {
   }
 }
 
-.wheel-fadein {
-  animation: floatIn 1s ease-out forwards;
+@keyframes heartbeat {
+  0%, 70%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  14% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  28% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  42% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
 }
 
+@keyframes slowSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ====== 標題與資訊區 ====== */
+.title, .subtitle, .info {
+  animation: pop-in 0.8s ease-out;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+}
+
+.info {
+  color: var(--darkBlue);
+  font-size: 1rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  font-family: "Roboto Condensed";
+  font-weight: 500;
+}
+
+.page-head {
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+}
 
 .page-head .title {
   margin: 0;
@@ -93,16 +106,28 @@ body {
   text-align: center;
 }
 
-.page-head .subtitle {
-  margin: 4px 0 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  opacity: .9;
+/* ====== 轉盤區（wheel） ====== */
+.wheel-page {
+  //background-image:
+    //linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    //url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  //overflow: hidden;
+  height: calc(100vh - 112px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-family: "Roboto Condensed";
 }
 
-/* 轉盤外框（正方形） */
+.wheel-fadein {
+  animation: floatIn 1s ease-out forwards;
+}
+
 .box {
   width: 540px;
   height: 540px;
@@ -110,8 +135,20 @@ body {
   border-radius: 50%;
 }
 
-/* 背景容器與圖片 */
-.box .bgImg {
+.wheel-background {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  border-radius: 90%;
+  background-color: #fff;
+  z-index: 0;
+  box-shadow: 0 4px 20px rgba(255, 199, 161, 0.8);
+}
+
+/* 背景圖容器 */
+.bgImg {
   width: 100%;
   height: 100%;
   position: relative;
@@ -120,7 +157,7 @@ body {
   z-index: 1;
 }
 
-.box .bgImg>img {
+.bgImg > img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -130,8 +167,8 @@ body {
   z-index: 1;
 }
 
-/* 旋轉容器 */
-.box .bgImg .wheel {
+/* 轉盤本體 */
+.wheel {
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -140,25 +177,18 @@ body {
   transition: transform 3s ease-in-out;
 }
 
-.wheel {
-  animation: none; /* 預設無動畫 */
-}
-
-
-/*讓轉盤自動轉動*/
 .wheel.slow-spin {
   animation: slowSpin 20s linear infinite;
 }
 
-/* === 底層：扇形色塊（不要放文字，避免互蓋） === */
-.box .bgImg .wheel .sectors {
+/* 扇形區 */
+.sectors {
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* 低於 labels */
 }
 
-.box .bgImg .wheel .sectors .sector {
+.sector {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -166,12 +196,11 @@ body {
   height: 540px;
   border-radius: 50%;
   clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
-  /* 右半圓 */
   transform-origin: center;
   overflow: hidden;
 }
 
-.box .bgImg .wheel .sectors .sector::before {
+.sector::before {
   content: "";
   width: 270px;
   height: 540px;
@@ -180,50 +209,19 @@ body {
   transform: rotate(120deg);
 }
 
+.sector:nth-child(1)::before { background-color: #e29da2; }
+.sector:nth-child(2)::before { background-color: #90b4cf; }
+.sector:nth-child(3)::before { background-color: #f6da85; }
 
-.box .bgImg .wheel .sectors .sector:nth-child(1)::before {
-  background-color: #e29da2;
-}
-
-.box .bgImg .wheel .sectors .sector:nth-child(2)::before {
-  background-color: #90b4cf;
-}
-
-.box .bgImg .wheel .sectors .sector:nth-child(3)::before {
-  background-color: #f6da85;
-}
-
-
-
-
-/* === 上層：標籤（圖示＋文字） === */
-.box .bgImg .wheel .labels {
+/* 標籤區 */
+.labels {
   position: absolute;
   inset: 0;
   z-index: 2;
-  /* 高於 sectors */
   pointer-events: none;
-  /* 不攔截滑鼠，讓中央按鈕可點 */
-}
-
-.labelBlock:nth-child(1) {
-  color: #ffffff;
-}
-
-.labelBlock:nth-child(2) {
-  color: #ffffff;
-}
-
-.labelBlock:nth-child(3) {
-  color: #aca06c;
 }
 
 .labelBlock {
-  color: var(--pink);
-  /* 或者使用一個預設變數 */
-}
-
-.box .bgImg .wheel .labels .labelBlock {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -233,40 +231,49 @@ body {
   align-items: center;
   gap: 6px;
   text-align: center;
+  color: var(--pink);
 }
 
+.labelBlock:nth-child(1) { color: #ffffff; }
+.labelBlock:nth-child(2) { color: #ffffff; }
+.labelBlock:nth-child(3) { color: #aca06c; }
 
-.box .bgImg .wheel .labels .icon {
+.icon {
   font-size: var(--iconSize);
-  line-height: 1;
+  width: var(--iconSize);
+  height: var(--iconSize);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.box .bgImg .wheel .labels .label {
+.icon svg {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+}
+
+.label {
   font-size: var(--labelSize);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: .5px;
 }
 
-/* 只有「食物」直排（要全部直排就把選擇器寫成 .label 直接套用即可） */
-.box .bgImg .wheel .labels .label.vertical {
+.label.vertical {
   writing-mode: vertical-rl;
-  /* 垂直排版（右到左） */
   text-orientation: upright;
-  /* 漢字直立 */
 }
 
-/* 覆蓋在轉盤上的互動層：中央按鈕 + 下方指針 */
-.box .overlay {
+/* 中央按鈕與指針區 */
+.overlay {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  /* 讓整層不攔截，僅中央按鈕可點 */
 }
 
-/* 中央按鈕 */
-.box .overlay .centerText {
+.centerText {
   pointer-events: auto;
   width: 110px;
   height: 110px;
@@ -285,78 +292,38 @@ body {
   align-items: center;
   user-select: none;
   cursor: pointer;
+  animation: heartbeat 1.5s ease-in-out infinite;
 }
 
-.box .overlay .centerText:hover {
+.centerText:hover {
   color: var(--pink);
   background-color: var(--lightPurplrRed);
 }
 
-.box .overlay .centerText:disabled {
+.centerText:disabled {
   opacity: .6;
   cursor: not-allowed;
 }
 
-/* 下方指針（朝上） */
-.box .overlay .arrowIcon {
-  pointer-events: none;
+/* 指針圖片 */
+.arrowIcon {
+  width: 200px;
+  height: auto;
   position: absolute;
-  left: 50%;
   bottom: -20px;
+  left: 40%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid var(--darkBlue) !important;
-  /* ▲ 朝上 */
-  margin-bottom: 6px;
+  z-index: 10;
+  filter: drop-shadow(0 4px 20px rgba(143, 123, 109, 0.3));
+  
 }
 
-
-:root {
-  --labelRadius: 155px;
-  --iconSize: 48px;
-  --labelSize: 24px;
-}
-
-/* ...其餘維持你現在的 wheel.scss... */
-
-/* icon 大小（方案 A / B 都通用） */
-.box .bgImg .wheel .labels .icon {
-  width: var(--iconSize);
-  height: var(--iconSize);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 針對 react-bootstrap-icons（SVG）確保填滿容器並跟隨 color */
-.box .bgImg .wheel .labels .icon svg {
-  width: 100%;
-  height: 100%;
-  color: currentColor;
-}
-
-.wheel-background {
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  border-radius: 90%;
-  background-color: #fff;
-  z-index: 0; /* 確保在 bgImg 底下 */
-   box-shadow: 0 4px 20px rgba(255, 199, 161, 0.8);
-}
-
-
-/* 手機版調整（螢幕寬度小於 570px 時） */
+/* ====== 手機 RWD ====== */
 @media (max-width: 570px) {
   :root {
-    --labelRadius: 100px;   /* 標籤內縮 */
-    --iconSize: 32px;       /* icon 縮小 */
-    --labelSize: 16px;      /* label 字體縮小 */
+    --labelRadius: 100px;
+    --iconSize: 32px;
+    --labelSize: 16px;
   }
 
   .box {
@@ -364,7 +331,7 @@ body {
     height: 360px;
   }
 
-  .box .overlay .centerText {
+  .centerText {
     width: 70px;
     height: 70px;
     font-size: 18px;
@@ -377,59 +344,8 @@ body {
   .page-head .subtitle {
     font-size: 14px;
   }
-}
 
-@keyframes heartbeat {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  14% {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  28% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  42% {
-    transform: translate(-50%, -50%) scale(1.15);
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-
-.box .overlay .centerText {
-  pointer-events: auto;
-  width: 110px;
-  height: 110px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 0;
-  background-color: var(--darkBlue);
-  color: var(--lightPurplrRed);
-  font-weight: 900;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
-
-  /* 加入動畫 */
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes slowSpin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+  .arrowIcon {
+    width: 150px;
   }
 }

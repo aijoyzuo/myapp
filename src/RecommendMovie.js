@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ShareButtons from "./component/ShareButtons";
 import RatingStars from "./component/RatingStars";
 import TryAgainButton from "./component/TryAgainButton";
+import LoadingOverlay from "./component/LoadingOverlay";
 
 function rangeHandler(item, answers) {
   const userValue = answers[item.id];
@@ -70,6 +71,14 @@ export default function RecommendMovie() {
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
 
   useEffect(() => {
     if (!answers) {
@@ -106,6 +115,9 @@ export default function RecommendMovie() {
   if (!answers) return null;
 
   return (
+    <>
+     <LoadingOverlay show={loading} text="推薦生成中..." />
+     {!loading && (
     <div className="container py-5">
       <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: '#ca4231' }}>
         <h5 className="m-0">懶惰影迷的選片推薦系統</h5>
@@ -170,5 +182,7 @@ export default function RecommendMovie() {
         <small>© {new Date().getFullYear()} All rights reserved.</small>
       </footer>
     </div>
+    )} 
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ShareButtons from "./component/ShareButtons";
 import RatingStars from "./component/RatingStars";
 import TryAgainButton from "./component/TryAgainButton";
+import LoadingOverlay from "./component/LoadingOverlay";
 
 // ---------- handler functions ----------
 function rangeHandler(item, answers) {
@@ -17,6 +18,7 @@ function rangeHandler(item, answers) {
 
   return userCategory === item.value ? 1 : 0;
 }
+
 
 function radioHandler(item, answers) {
   const userValue = answers[item.id];
@@ -64,6 +66,13 @@ export default function RecommendBook() {
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     if (!answers) {
@@ -100,7 +109,12 @@ export default function RecommendBook() {
 
   if (!answers) return null;
 
-  return (
+
+
+
+  return (<>  
+  <LoadingOverlay show={loading} text="推薦生成中..." />
+   {!loading && (
     <div className="container py-5">
       <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: "#4D606e" }}>
         <h5 className="m-0">懶人書蟲的推薦系統</h5>
@@ -123,7 +137,7 @@ export default function RecommendBook() {
                   <div className="d-flex gap-2">
                     <h5 className="card-title mb-0">{book.title}</h5>
                     {book.rating === '限制級' && <div><p className="badge bg-danger text-white">{book.rating}</p></div>}
-                    {book.duration !=='一般篇幅' && <div><p className="badge bg-secondary text-white">{book.duration}</p></div>}
+                    {book.duration !== '一般篇幅' && <div><p className="badge bg-secondary text-white">{book.duration}</p></div>}
                   </div>
 
                   <p className="card-text">{book.description}</p>
@@ -131,7 +145,7 @@ export default function RecommendBook() {
                     <li>作者：{book.author}</li>
                     <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
                     <li>系列：{book.preference}</li>
-                    <li>語言：{book.language}</li>                    
+                    <li>語言：{book.language}</li>
                     <li>配對分數：<RatingStars score={book.score} /></li>
                   </ul>
                 </div>
@@ -171,6 +185,7 @@ export default function RecommendBook() {
       <footer className="bg-dark text-white text-center py-3 fixed-bottom">
         <small>© {new Date().getFullYear()} All rights reserved.</small>
       </footer>
-    </div>
-  );
-}
+    </div> 
+    )} 
+  </>
+)}
