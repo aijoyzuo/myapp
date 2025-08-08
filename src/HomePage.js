@@ -58,7 +58,7 @@ export default function HomePage() {
   return (
     <>
       <div className="py-5">
-        <header className="text-center py-3 shadow-sm fixed-top" style={{ color:'var(--darkBlue)',backgroundColor: 'var(--pink)' }}>
+        <header className="text-center py-3 shadow-sm fixed-top" style={{ color:'var(--darkBlue)',backgroundColor: 'var(--pink-alpha)' }}>
           <h1 className="title mb-0">懶人救星</h1>
         </header>
         <div className="wheel-page">
@@ -130,7 +130,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: 'var(--pink)' }}>
+        <footer className="text-white text-center py-3 fixed-bottom" style={{ backgroundColor: 'var(--pink-alpha)' }}>
           <small>© {new Date().getFullYear()} All rights reserved.</small>
         </footer>
       </div>

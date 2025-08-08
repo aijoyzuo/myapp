@@ -6,6 +6,7 @@
   --lightBlue: rgb(52, 59, 170);
   --darkBlue: #6e340d;
   --pink: rgb(255, 199, 161);
+   --pink-alpha: rgba(255, 199, 161, 0.3); /* 新增透明版本 */
   --lightPurplrRed: #ffebd4;
 
   --labelRadius: 155px;
@@ -23,10 +24,12 @@ body {
     opacity: 0;
     transform: translateY(-20px) scale(0.8);
   }
+
   60% {
     opacity: 1;
     transform: translateY(5px) scale(1.05);
   }
+
   100% {
     transform: translateY(0) scale(1);
   }
@@ -37,6 +40,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -44,15 +48,21 @@ body {
 }
 
 @keyframes heartbeat {
-  0%, 70%, 100% {
+
+  0%,
+  70%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
   }
+
   14% {
     transform: translate(-50%, -50%) scale(1.2);
   }
+
   28% {
     transform: translate(-50%, -50%) scale(1);
   }
+
   42% {
     transform: translate(-50%, -50%) scale(1.15);
   }
@@ -62,13 +72,16 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 /* ====== 標題與資訊區 ====== */
-.title, .subtitle, .info {
+.title,
+.subtitle,
+.info {
   animation: pop-in 0.8s ease-out;
   font-weight: bold;
   letter-spacing: 0.1em;
@@ -109,8 +122,8 @@ body {
 /* ====== 轉盤區（wheel） ====== */
 .wheel-page {
   //background-image:
-    //linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-    //url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
+  //linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+  //url('https://images.plurk.com/547MaKge7wUmGa0UHiS9r2.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -129,19 +142,21 @@ body {
 }
 
 .box {
-  width: 540px;
-  height: 540px;
+  width: min(92vw, 540px);
+  aspect-ratio: 1 / 1;
+  /* 關鍵：固定 1:1 */
   position: relative;
   border-radius: 50%;
 }
 
 .wheel-background {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  border-radius: 90%;
+  inset: -10px;
+  //top: -10px;
+  //left: -10px;
+  //width: calc(100% + 20px);
+  //height: calc(100% + 20px);
+  border-radius: 50%;
   background-color: #fff;
   z-index: 0;
   box-shadow: 0 4px 20px rgba(255, 199, 161, 0.8);
@@ -157,7 +172,7 @@ body {
   z-index: 1;
 }
 
-.bgImg > img {
+.bgImg>img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -182,36 +197,47 @@ body {
 }
 
 /* 扇形區 */
-.sectors {
+.sectors,
+.labels {
   position: absolute;
   inset: 0;
-  z-index: 1;
 }
+
 
 .sector {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 540px;
-  height: 540px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
   transform-origin: center;
+  transform: translate(-50%, -50%);
   overflow: hidden;
 }
 
 .sector::before {
   content: "";
-  width: 270px;
-  height: 540px;
+  width: 50%;
+  /* 原本 270px → 50% */
+  height: 100%;
   position: absolute;
   transform-origin: right center;
   transform: rotate(120deg);
 }
 
-.sector:nth-child(1)::before { background-color: #e29da2; }
-.sector:nth-child(2)::before { background-color: #90b4cf; }
-.sector:nth-child(3)::before { background-color: #f6da85; }
+.sector:nth-child(1)::before {
+  background-color: #e29da2;
+}
+
+.sector:nth-child(2)::before {
+  background-color: #90b4cf;
+}
+
+.sector:nth-child(3)::before {
+  background-color: #f6da85;
+}
 
 /* 標籤區 */
 .labels {
@@ -234,9 +260,17 @@ body {
   color: var(--pink);
 }
 
-.labelBlock:nth-child(1) { color: #ffffff; }
-.labelBlock:nth-child(2) { color: #ffffff; }
-.labelBlock:nth-child(3) { color: #aca06c; }
+.labelBlock:nth-child(1) {
+  color: #ffffff;
+}
+
+.labelBlock:nth-child(2) {
+  color: #ffffff;
+}
+
+.labelBlock:nth-child(3) {
+  color: #8f8141;
+}
 
 .icon {
   font-size: var(--iconSize);
@@ -307,15 +341,16 @@ body {
 
 /* 指針圖片 */
 .arrowIcon {
-  width: 200px;
-  height: auto;
   position: absolute;
-  bottom: -20px;
-  left: 40%;
+  left: 50%;
+  /* 原本 40% → 50% 才能置中 */
+  bottom: -8%;
   transform: translateX(-50%);
+  width: clamp(120px, 35%, 200px);
+  /* 隨寬度縮放 */
+  height: auto;
   z-index: 10;
   filter: drop-shadow(0 4px 20px rgba(143, 123, 109, 0.3));
-  
 }
 
 /* ====== 手機 RWD ====== */
@@ -325,11 +360,7 @@ body {
     --iconSize: 32px;
     --labelSize: 16px;
   }
-
-  .box {
-    width: 360px;
-    height: 360px;
-  }
+ 
 
   .centerText {
     width: 70px;
@@ -345,7 +376,8 @@ body {
     font-size: 14px;
   }
 
-  .arrowIcon {
-    width: 150px;
+   .arrowIcon {
+    width: clamp(100px, 40%, 150px);
+    bottom: -10%;
   }
 }

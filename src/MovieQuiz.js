@@ -88,7 +88,7 @@ export default function MovieQuiz() {
 		<>
 			<LoadingOverlay show={loading} text="" />
 			{!loading && (
-				<div className="movie-quiz">
+				<div className="movie-quiz mb-3">
 					<div className="container py-3">
 						<div className="card">
 							<img src={titlePic} className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
@@ -163,12 +163,10 @@ export default function MovieQuiz() {
 									<button type="submit" className="btn btn-outline-dark p-2 mt-2  w-100 border-2" disabled={!isFormComplete}>送出</button>
 								</form>
 							</div>
-
+							<div className="card-footer py-2" style={{ backgroundColor: '#ca4231' }}>
+							</div>
 						</div>
 					</div>
-					<div className="card-footer py-2" style={{ backgroundColor: '#ca4231' }}>
-					</div>
-
 				</div>
 			)}
 		</>

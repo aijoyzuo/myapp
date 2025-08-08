@@ -88,7 +88,7 @@ export default function FoodQuiz() {
 		<>
 			<LoadingOverlay show={loading} text="" />
 			{!loading && (
-				<div className="food-quiz">
+				<div className="food-quiz mb-3">
 					<div className="container py-3">
 						<div className="card">
 							<img src={titlePic} className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
@@ -163,11 +163,12 @@ export default function FoodQuiz() {
 									<button type="submit" className="btn btn-outline-dark p-2 mt-2  w-100 border-2" disabled={!isFormComplete}>送出</button>
 								</form>
 							</div>
-
+							<div className="card-footer py-2" style={{ backgroundColor: '#f6da85' }}>
+							</div>
 						</div>
+
 					</div>
-					<div className="card-footer py-2" style={{ backgroundColor: '#f6da85' }}>
-					</div>
+
 
 				</div>
 			)}

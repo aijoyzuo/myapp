@@ -87,90 +87,89 @@ export default function BookQuiz() {
 	return (
 		<>
 			<LoadingOverlay show={loading} text="" />
-			{!loading && (
-				<div className="book-quiz">
-					<div className="container py-3">
-						<div className="card">
-							<img src={titlePic} className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
-							<div className="card-body">
-								<div className="card-title text-center mb-5">
-									<h3>{title}</h3>
-								</div>
-								<form onSubmit={handleSubmit}>
-									<div className="row pb-4 border-bottom">
-										<div className="col-md-6 py-2">
-											<label htmlFor="fillPerson" className="h5 form-label">暱稱<span className="text-danger">*</span></label>
-											<input type="text"
-												className="form-control py-3"
-												id="fillPerson"
-												required
-												value={answers.fillPerson}
-												onChange={e => setAnswers(a => ({ ...a, fillPerson: e.target.value }))} />
-										</div>
-										<div className="col-md-6 py-2">
-											<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span className="text-danger">*</span></label>
-											<input type="date"
-												className="form-control py-3"
-												id="fillDate"
-												placeholder="yyyy/mm/dd"
-												required
-												value={answers.fillDate}
-												onChange={e => setAnswers(a => ({ ...a, fillDate: e.target.value }))} />
-										</div>
+			{!loading && (				
+					<div className="book-quiz mb-3">
+						<div className="container py-3">
+							<div className="card">
+								<img src={titlePic} className="card-img-top w-100" alt="theater" style={{ maxHeight: "300px", objectFit: "cover" }} />
+								<div className="card-body">
+									<div className="card-title text-center mb-5">
+										<h3>{title}</h3>
 									</div>
-									{qData.questions.filter(q => q.type === 'range').map(q => (
-										<SliderQuestion
-											key={q.id}
-											label={q.label}
-											field={q.field}
-											value={answers[q.field]}
-											min={q.min}
-											max={q.max}
-											step={q.step}
-											onChange={(f, val) => setAnswers(a => ({ ...a, [f]: val }))}
-											sliderClassName="slider-book"
-										/>
-									))}
+									<form onSubmit={handleSubmit}>
+										<div className="row pb-4 border-bottom">
+											<div className="col-md-6 py-2">
+												<label htmlFor="fillPerson" className="h5 form-label">暱稱<span className="text-danger">*</span></label>
+												<input type="text"
+													className="form-control py-3"
+													id="fillPerson"
+													required
+													value={answers.fillPerson}
+													onChange={e => setAnswers(a => ({ ...a, fillPerson: e.target.value }))} />
+											</div>
+											<div className="col-md-6 py-2">
+												<label htmlFor="fillDate" className="h5 form-label">問卷填寫日期<span className="text-danger">*</span></label>
+												<input type="date"
+													className="form-control py-3"
+													id="fillDate"
+													placeholder="yyyy/mm/dd"
+													required
+													value={answers.fillDate}
+													onChange={e => setAnswers(a => ({ ...a, fillDate: e.target.value }))} />
+											</div>
+										</div>
+										{qData.questions.filter(q => q.type === 'range').map(q => (
+											<SliderQuestion
+												key={q.id}
+												label={q.label}
+												field={q.field}
+												value={answers[q.field]}
+												min={q.min}
+												max={q.max}
+												step={q.step}
+												onChange={(f, val) => setAnswers(a => ({ ...a, [f]: val }))}
+												sliderClassName="slider-book"
+											/>
+										))}
 
-									{/* Radio & Checkbox 通用渲染 */}
-									{qData.questions.filter(q => q.type === 'radio').map(q => (
-										<RadioQuestion
-											key={q.id}
-											question={q.label}
-											options={q.options}
-											field={q.field}
-											value={answers[q.field]}
-											onChange={val => setAnswers(a => ({ ...a, [q.field]: val }))}
-										/>
-									))}
-									{qData.questions.filter(q => q.type === 'checkbox').map(q => (
-										<CheckboxQuestion
-											key={q.id}
-											question={q.label}
-											options={q.options}
-											field={q.field}
-											value={answers[q.field]}
-											onChange={(id, checked) => {
-												setAnswers(prev => {
-													const set = new Set(prev[q.field]);
-													checked ? set.add(id) : set.delete(id);
-													return { ...prev, [q.field]: Array.from(set) };
-												});
-											}}
-										/>
-									))}
+										{/* Radio & Checkbox 通用渲染 */}
+										{qData.questions.filter(q => q.type === 'radio').map(q => (
+											<RadioQuestion
+												key={q.id}
+												question={q.label}
+												options={q.options}
+												field={q.field}
+												value={answers[q.field]}
+												onChange={val => setAnswers(a => ({ ...a, [q.field]: val }))}
+											/>
+										))}
+										{qData.questions.filter(q => q.type === 'checkbox').map(q => (
+											<CheckboxQuestion
+												key={q.id}
+												question={q.label}
+												options={q.options}
+												field={q.field}
+												value={answers[q.field]}
+												onChange={(id, checked) => {
+													setAnswers(prev => {
+														const set = new Set(prev[q.field]);
+														checked ? set.add(id) : set.delete(id);
+														return { ...prev, [q.field]: Array.from(set) };
+													});
+												}}
+											/>
+										))}
 
-									<button type="submit" className="btn btn-outline-dark p-2 mt-2  w-100 border-2" disabled={!isFormComplete}>送出</button>
-								</form>
+										<button type="submit" className="btn btn-outline-dark p-2 mt-2  w-100 border-2" disabled={!isFormComplete}>送出</button>
+									</form>
+								</div>
+								<div className="card-footer py-2" style={{ backgroundColor: '#4D606E' }}>
+								</div>
 							</div>
-
 						</div>
-					</div>
-					<div className="card-footer py-2" style={{ backgroundColor: '#4D606E' }}>
-					</div>
-
-				</div>
+					</div>				
 			)}
+
 		</>
 	)
 

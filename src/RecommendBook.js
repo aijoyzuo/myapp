@@ -4,6 +4,7 @@ import ShareButtons from "./component/ShareButtons";
 import RatingStars from "./component/RatingStars";
 import TryAgainButton from "./component/TryAgainButton";
 import LoadingOverlay from "./component/LoadingOverlay";
+import Lightbox from "./component/Lightbox";
 
 // ---------- handler functions ----------
 function rangeHandler(item, answers) {
@@ -66,7 +67,8 @@ export default function RecommendBook() {
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  
+  const [lightbox, setLightbox] = useState({ open: false, index: 0 });//  Lightbox 
 
   useEffect(() => {
     setTimeout(() => {
@@ -107,85 +109,121 @@ export default function RecommendBook() {
       .catch((err) => console.error("讀取失敗 👉", err));
   }, [answers, navigate]);
 
+
+  // 開燈箱時禁用背景滾動 + 綁定鍵盤事件(ESC/左右鍵) 
+  const openLightbox = (i) => setLightbox({ open: true, index: i });
+  const closeLightbox = () => setLightbox({ open: false, index: 0 });
+  const nextImage = () =>
+    setLightbox(lb => ({ open: true, index: (lb.index + 1) % recommended.length }));
+  const prevImage = () =>
+    setLightbox(lb => ({ open: true, index: (lb.index - 1 + recommended.length) % recommended.length }));
+
+
+
+
   if (!answers) return null;
 
 
 
 
-  return (<>  
-  <LoadingOverlay show={loading} text="推薦生成中..." />
-   {!loading && (
-    <div className="container py-5">
-      <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: "#4D606e" }}>
-        <h5 className="m-0">懶人書蟲的推薦系統</h5>
-      </header>
+  return (<>
+    <LoadingOverlay show={loading} text="推薦生成中..." />
+    {!loading && (
+      <div className="container py-5">
+        <header className="text-center py-3 shadow-sm fixed-top text-white" style={{ backgroundColor: "#4D606e" }}>
+          <h5 className="m-0">懶人書蟲的推薦系統</h5>
+        </header>
 
-      <main className="flex-grow-1 py-5 mt-4">
-        <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
-        <div className="row">
-          {recommended.map((book, index) => (
-            <div key={book.id} className="col-md-4 mb-4 position-relative">
-              <div className="card h-100 fade-in-up">
-                <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end"
-                  style={{ backgroundColor: "rgba(77, 96, 110, 0.7)" }}>
-                  <i className="bi bi-award-fill me-1" />No.{index + 1}
-                </div>
-
-                <img src={book.image} className="card-img-top object-fit-cover" style={{ height: "250px", objectPosition: "center" }} alt={book.title} />
-
-                <div className="card-body">
-                  <div className="d-flex gap-2">
-                    <h5 className="card-title mb-0">{book.title}</h5>
-                    {book.rating === '限制級' && <div><p className="badge bg-danger text-white">{book.rating}</p></div>}
-                    {book.duration !== '一般篇幅' && <div><p className="badge bg-secondary text-white">{book.duration}</p></div>}
+        <main className="flex-grow-1 py-3 mt-4">
+          <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
+          <div className="row justify-content-center">
+            {recommended.map((book, index) => (
+              <div key={book.id} className="col-md-4 col-lg-3 mb-2 position-relative">
+                <div className="card h-100 fade-in-up">
+                  <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end"
+                    style={{ backgroundColor: "rgba(77, 96, 110, 0.7)" }}>
+                    <i className="bi bi-award-fill me-1" />No.{index + 1}
                   </div>
 
-                  <p className="card-text">{book.description}</p>
-                  <ul className="list-unstyled small">
-                    <li>作者：{book.author}</li>
-                    <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
-                    <li>系列：{book.preference}</li>
-                    <li>語言：{book.language}</li>
-                    <li>配對分數：<RatingStars score={book.score} /></li>
-                  </ul>
+                  {/* 圖片，點選後開燈箱 */}
+                  <img
+                    src={book.image}
+                    className="card-img-top object-fit-cover"
+                    style={{ height: '300px', objectPosition: 'center', cursor: 'zoom-in' }}
+                    alt={book.title}
+                    onClick={() => openLightbox(index)}
+                  />
+
+
+                  <div className="card-body">
+                    <div className="d-flex gap-2">
+                      <h5 className="card-title mb-0">{book.title}</h5>
+                      {book.rating === '限制級' && <div><p className="badge bg-danger text-white">{book.rating}</p></div>}
+                      {book.duration !== '一般篇幅' && <div><p className="badge bg-secondary text-white">{book.duration}</p></div>}
+                    </div>
+
+                    <p className="card-text">{book.description}</p>
+                    <ul className="list-unstyled small">
+                      <li>作者：{book.author}</li>
+                      <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
+                      <li>系列：{book.preference}</li>
+                      <li>語言：{book.language}</li>
+                      <li>配對分數：<RatingStars score={book.score} /></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
+            ))}
+
+            {recommended.length === 0 && (
+              <p className="text-center mt-5">抱歉，找不到符合條件的書籍。</p>
+            )}
+          </div>
+
+          <div className="row justify-content-center mt-2">
+            <div className="col-12 col-md-5">
+              <ShareButtons title="這本書超適合你！" />
             </div>
-          ))}
-
-          {recommended.length === 0 && (
-            <p className="text-center mt-5">抱歉，找不到符合條件的書籍。</p>
-          )}
-        </div>
-
-        <div className="row justify-content-center mt-4">
-          <div className="col-12 col-md-5">
-            <ShareButtons title="這本書超適合你！" />
           </div>
-        </div>
 
-        <div className="row justify-content-center mt-4">
-          <div className="col-12 col-md-4">
-            <TryAgainButton
-              text="再懶一次"
-              buttonColor="#4D606e"
-              textColor="text-white"
-              swalBackground="#90b4cf"
-              swalClass={{
-                confirmButton: "btn btn-primary mx-2",
-                cancelButton: "btn btn-outline-primary bg-white mx-2",
-                actions: "swal2-button-group-gap"
-              }}
-              redirectPath="/"
-            />
+          <div className="row justify-content-center mt-2">
+            <div className="col-12 col-md-4">
+              <TryAgainButton
+                text="再懶一次"
+                buttonColor="#4D606e"
+                textColor="text-white"
+                swalBackground="#90b4cf"
+                swalClass={{
+                  confirmButton: "btn btn-primary mx-2",
+                  cancelButton: "btn btn-outline-primary bg-white mx-2",
+                  actions: "swal2-button-group-gap"
+                }}
+                redirectPath="/"
+              />
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <footer className="bg-dark text-white text-center py-3 fixed-bottom">
-        <small>© {new Date().getFullYear()} All rights reserved.</small>
-      </footer>
-    </div> 
-    )} 
+        <footer className="bg-dark text-white text-center py-3 fixed-bottom">
+          <small>© {new Date().getFullYear()} All rights reserved.</small>
+        </footer>
+
+        {/* ===== Lightbox Overlay ===== */}
+        <Lightbox
+          isOpen={lightbox.open}
+          images={recommended}
+          index={lightbox.index}
+          onClose={closeLightbox}
+          onPrev={prevImage}
+          onNext={nextImage}
+          showBadge={true}
+        />
+
+
+
+
+      </div>
+    )}
   </>
-)}
+  )
+}
