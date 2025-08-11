@@ -1769,7 +1769,7 @@
     {
       "id": "book030",
       "title": "以你的名字呼喚我",
-      "author": "安德烈·艾席蒙（中譯：李靜宜）",
+      "author": "安德烈·艾席蒙",
       "description": "跨越語言與文化的青春戀情，細膩描繪少年初戀的情愫與掙扎。",
       "image": "https://pic.pimg.tw/emilee2216/1517470689-2125367219_n.jpg",
       "duration": "長篇",
@@ -1827,6 +1827,69 @@
           ]
         }
       ]
-    }
+    },
+     {
+    "id": "book031",
+    "title": "牧羊少年奇幻之旅",
+    "author": "保羅·科爾賀",
+    "description": "一名牧羊少年追尋寶藏的旅程，寓意著追隨夢想與自我實現的勇氣與智慧。",
+    "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTqTKVOvkp8npm4FX-RbR49vaNDXRyOt8enJUac3GLH7DmuKdhX",
+    "duration": "長篇",
+    "genre": "inspiration",
+    "preference": "單行本",
+    "rating": "全年齡",
+    "language": ["歐美"],
+    "mood": ["勵志", "探索", "成長"],
+    "answer": [
+      { "id": "duration", "type": "range", "value": "long" },
+      { "id": "genre", "type": "radio", "value": ["inspiration"] },
+      { "id": "preference", "type": "radio", "value": ["standalone"] },
+      { "id": "rating", "type": "radio", "value": ["general"] },
+      { "id": "language", "type": "checkbox", "value": ["westen"] },
+      { "id": "mood", "type": "checkbox", "value": ["emotional"] }
+    ]
+  },
+  {
+    "id": "book032",
+    "title": "當下的力量",
+    "author": "艾克哈特·托勒",
+    "description": "引導讀者覺察自我與當下，學習放下過去與未來的執著，活在當下找到心靈平靜。",
+    "image": "https://s2.eslite.com/unsafe/fit-in/x900/s.eslite.com/upload/product/o/2680321490001/20190410215051356642.jpg",
+    "duration": "長篇",
+    "genre": "inspiration",
+    "preference": "單行本",
+    "rating": "全年齡",
+    "language": ["歐美"],
+    "mood": ["心靈", "啟發", "勵志"],
+    "answer": [
+      { "id": "duration", "type": "range", "value": "long" },
+      { "id": "genre", "type": "radio", "value": ["inspiration"] },
+      { "id": "preference", "type": "radio", "value": ["standalone"] },
+      { "id": "rating", "type": "radio", "value": ["general"] },
+      { "id": "language", "type": "checkbox", "value": ["westen"] },
+      { "id": "mood", "type": "checkbox", "value": ["emotional"] }
+    ]
+  },
+  {
+    "id": "book033",
+    "title": "追風箏的孩子",
+    "author": "卡勒德·胡賽尼",
+    "description": "一段跨越友情、背叛與贖罪的故事，提醒人們勇敢面對過去與尋求救赎的力量。",
+    "image": "https://books.google.com.tw/books/publisher/content?id=ZXf1EAAAQBAJ&hl=zh-TW&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1rS7NO_RMBiXmZ5Ax29OG7dZgBhw&w=1280",
+    "duration": "長篇",
+    "genre": "inspiration",
+    "preference": "單行本",
+    "rating": "全年齡",
+    "language": ["歐美"],
+    "mood": ["感人", "成長", "勵志"],
+    "answer": [
+      { "id": "duration", "type": "range", "value": "long" },
+      { "id": "genre", "type": "radio", "value": ["inspiration"] },
+      { "id": "preference", "type": "radio", "value": ["standalone"] },
+      { "id": "rating", "type": "radio", "value": ["general"] },
+      { "id": "language", "type": "checkbox", "value": ["westen"] },
+      { "id": "mood", "type": "checkbox", "value": ["emotional"] }
+    ]
+  }
   ]
 }
