@@ -156,7 +156,7 @@ export default function RecommendBook() {
                     className="card-img-top object-fit-cover"
                     style={{ height: '300px', objectPosition: 'center', cursor: 'zoom-in' }}
                     alt={book.title}
-                    onClick={() => openLightbox(index)}
+                    onClick={() => openLightbox(index)}                    
                   />
 
 

@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 export default function ShareButtons({ url = window.location.href, title = "快來看看這個內容！" }) {
   return (
-    <div className="text-center mt-4">
+    <div className="text-center">
       <h5>分享這個頁面</h5>
       <div className="d-flex justify-content-center gap-3 mt-2 flex-wrap">
         <a
