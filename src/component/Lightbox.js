@@ -1,5 +1,5 @@
 // src/component/Lightbox.jsx
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Lightbox({
   isOpen,
@@ -9,18 +9,15 @@ export default function Lightbox({
   onPrev,
   onNext,
   showBadge = false,
-
-  // 圖片
   srcResolver,
   altResolver,
-
-  // 內容（父層全權決定要顯示哪些欄位與文案）
-  metaResolver,    // (item) => [{ label, value }]
-  actionsResolver, // (item, index) => [{ label, href?, onClick?, variant? }]
-
-  // 文案
+  metaResolver,
+  actionsResolver,
   closeLabel = "關閉",
 }) {
+  const imgRef = useRef(null);
+  const [isSmall, setIsSmall] = useState(false);
+
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e) => {
@@ -44,8 +41,18 @@ export default function Lightbox({
   const meta = metaResolver ? metaResolver(item) : [];
   const actions = actionsResolver ? actionsResolver(item, index) : [];
 
+  // 圖片載入後依天然尺寸判斷是否算小圖
+  const handleImgLoad = (e) => {
+    const nw = e.target.naturalWidth;
+    const nh = e.target.naturalHeight;
+    // 你可以調整這個門檻；這裡以寬 < 320 或 高 < 320 視為小圖
+    const SMALL_W = 320;
+    const SMALL_H = 320;
+    setIsSmall(nw < SMALL_W || nh < SMALL_H);
+  };
+
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" >
+    <div className="lightbox" role="dialog" aria-modal="true">
       <button
         className="lightbox-btn lightbox-prev"
         aria-label="上一張"
@@ -55,14 +62,19 @@ export default function Lightbox({
       <div className="lightbox-img-wrapper" onClick={(e) => e.stopPropagation()}>
         {showBadge && <div className="lightbox-badge">No.{index + 1}</div>}
 
-        <img src={src} alt={alt} className="lightbox-img" />
+        <img
+          ref={imgRef}
+          src={src}
+          alt={alt}
+          onLoad={handleImgLoad}
+          className={`lightbox-img ${isSmall ? 'small' : ''}`}
+        />
 
- 
-        {/* 只保留覆蓋在底部的資訊框 */}
+        {/* 底部資訊框 */}
         <div className="lightbox-info overlay" onClick={(e) => e.stopPropagation()}>
-                 {item.title && (
-  <h6 className="lightbox-title mb-2 fw-bold">{item.title}</h6>
-)}
+          {item.title && (
+            <h6 className="lightbox-title mb-2 fw-bold">{item.title}</h6>
+          )}
 
           {Array.isArray(meta) && meta.length > 0 && (
             <ul className="lightbox-meta list-unstyled d-flex flex-wrap gap-2 mb-2">

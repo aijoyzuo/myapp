@@ -36,7 +36,8 @@
                         "id": "mystery",
                         "label": "懸疑"
                     }
-                ]
+                ],
+                "weight": 6
             },
             {
                 "id": "preference",

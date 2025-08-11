@@ -37,6 +37,11 @@
   /* 圓角交給 wrapper，這裡不再設 */
 }
 
+.lightbox-img.small {
+  width: clamp(500px, 50vw, 600px);
+  max-width: 100%;
+}
+
 /* 共同外觀 */
 .lightbox-info {
   background: rgba(0, 0, 0, .6);

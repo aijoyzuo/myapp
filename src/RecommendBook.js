@@ -23,11 +23,16 @@ function rangeHandler(item, answers) {
 
 function radioHandler(item, answers) {
   const userValue = answers[item.id];
-
-  // ✅ 若是「不限」，不計分
   if (userValue === '不限') return 0;
 
-  return item.value.includes(userValue) ? 1 : 0;
+  if (item.id === "genre") {
+    const userIsInspiration = userValue === "inspiration";
+    const bookIsInspiration = Array.isArray(item.value) && item.value.includes("inspiration");
+    console.log("genre 題選擇：", userValue, "| 書是否勵志：", bookIsInspiration);
+    return userIsInspiration && bookIsInspiration ? 1 : 0;
+  }
+
+  return Array.isArray(item.value) && item.value.includes(userValue) ? 1 : 0;
 }
 
 function checkboxHandler(item, answers) {
@@ -165,9 +170,9 @@ export default function RecommendBook() {
                     <p className="card-text">{book.description}</p>
                     <ul className="list-unstyled small">
                       <li>作者：{book.author}</li>
-                      <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>                      
+                      <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
                       <li>語言：{book.language}</li>
-                      <li>配對分數：<RatingStars score={book.score} /></li>
+                      <li>推薦指數：<RatingStars score={book.score} /></li>
                     </ul>
                   </div>
                 </div>
@@ -229,9 +234,9 @@ export default function RecommendBook() {
           // 這裡決定要顯示哪些欄位 + 每個欄位的「文字」
           metaResolver={(m) => [
             m.author && { label: "作者：", value: m.author },
-            m.rating && { label: "", value: m.rating },    
+            m.rating && { label: "", value: m.rating },
             m.preference && { label: "", value: m.preference },
-                               
+
           ].filter(Boolean)}
 
           // 這裡決定「搜尋片源」按鈕（文案可改）
