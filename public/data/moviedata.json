@@ -5,7 +5,7 @@
       "title": "天能",
       "description": "一場逆轉時間的特工任務",
       "image": "https://www.themoviedb.org/t/p/w1280/tASJpacWyivVyRnUahaxT2cJg5L.jpg",
-      "duration": "long",
+      "duration": 150,
       "person": [
         "single",
         "couple"
@@ -68,7 +68,7 @@
       "title": "你的名字",
       "description": "跨越時空的奇幻愛情故事",
       "image": "https://www.themoviedb.org/t/p/w1280/re9VGdZlwTrzo9G5mQ0Ywtus6uU.jpg",
-      "duration": "medium",
+      "duration":106 ,
       "person": [
         "single",
         "couple"
@@ -131,7 +131,7 @@
       "title": "82年生的金智英",
       "description": "探討女性在社會中的掙扎與成長",
       "image": "https://www.themoviedb.org/t/p/w1280/sb86p7v10x2Q0Ume8nwLqKDvqB1.jpg",
-      "duration": "medium",
+      "duration": 118 ,
       "person": [
         "single"
       ],
@@ -191,7 +191,7 @@
       "title": "寄生上流",
       "description": "描寫階級對立的黑色喜劇驚悚片",
       "image": "https://www.themoviedb.org/t/p/w1280/nwTQE4vWe6NoFSEgxGu4hO9J4Tv.jpg",
-      "duration": "long",
+      "duration": 132 ,
       "person": [
         "couple",
         "group"
@@ -253,7 +253,7 @@
       "title": "小丑",
       "description": "探討社會與心理疾病的黑暗傳記",
       "image": "https://www.themoviedb.org/t/p/w1280/hHGbcQTUbVEFXmkDQPPcejFWY1c.jpg",
-      "duration": "long",
+      "duration": 122 ,
       "person": [
         "single"
       ],
@@ -314,7 +314,7 @@
       "title": "名偵探柯南：萬聖節的新娘",
       "description": "柯南與朋友們揭開婚禮中的恐怖陰謀",
       "image": "https://www.themoviedb.org/t/p/w1280/aeQ7AlE0m5hSuWsizJNufIscIV2.jpg",
-      "duration": "medium",
+      "duration": 111,
       "person": [
         "group"
       ],
@@ -375,7 +375,7 @@
       "title": "天氣之子",
       "description": "一段與天氣交織的青春奇幻愛情",
       "image": "https://www.themoviedb.org/t/p/w1280/4IKNr9R9HpaIUFVHivTDa3Vdplj.jpg",
-      "duration": "medium",
+      "duration": 112,
       "person": [
         "couple"
       ],
@@ -435,7 +435,7 @@
       "title": "返校",
       "description": "白色恐怖背景下的驚悚懸疑",
       "image": "https://image.tmdb.org/t/p/w1280/2IiYOxfJJjU7oSaug5vudwxwhRo.jpg",
-      "duration": "short",
+      "duration": 100,
       "person": [
         "single",
         "group"
@@ -498,7 +498,7 @@
       "title": "角落小夥伴電影版",
       "description": "溫馨可愛的角色陪你療癒心靈",
       "image": "https://www.themoviedb.org/t/p/w1280/fudKmoQwH3vTEITfSdRMefGI9KH.jpg",
-      "duration": "short",
+      "duration": 65,
       "person": [
         "single",
         "couple"
@@ -561,7 +561,7 @@
       "title": "我吃了那男孩一整年的早餐",
       "description": "青春校園裡的戀愛與成長",
       "image": "https://www.themoviedb.org/t/p/w1280/lCMirnpsOPP4MoLcr2JOHM9LP6Y.jpg",
-      "duration": "medium",
+      "duration": 119,
       "person": [
         "couple"
       ],
@@ -622,7 +622,7 @@
       "title": "獅子王",
       "description": "經典迪士尼動畫，成長與冒險的故事",
       "image": "https://www.themoviedb.org/t/p/w1280/eFtJyNhv339OHknjFNq76bkxPlw.jpg",
-      "duration": "medium",
+      "duration": 88 ,
       "person": [
         "group"
       ],
@@ -638,7 +638,7 @@
         {
           "id": "duration",
           "type": "range",
-          "value": "medium"
+          "value": "short"
         },
         {
           "id": "person",
@@ -683,7 +683,7 @@
       "title": "大佛普拉斯",
       "description": "描寫底層人物生活的黑色幽默片",
       "image": "https://www.themoviedb.org/t/p/w1280/1nDK6Kd0yAk6eoULAoI7e8wv4Mw.jpg",
-      "duration": "medium",
+      "duration":104,
       "person": [
         "single"
       ],
@@ -744,7 +744,7 @@
       "title": "海街日記",
       "description": "四姐妹的日常與情感交織的生活故事",
       "image": "https://www.themoviedb.org/t/p/w1280/rcV6mB9OhVq4o9F9ylpDLdR0luu.jpg",
-      "duration": "medium",
+      "duration":126,
       "person": [
         "single",
         "couple"
@@ -761,7 +761,7 @@
         {
           "id": "duration",
           "type": "range",
-          "value": "medium"
+          "value": "long"
         },
         {
           "id": "person",
@@ -807,7 +807,7 @@
       "title": "燃燒女子的畫像",
       "description": "藝術與禁忌愛情交織的唯美之作",
       "image": "https://www.themoviedb.org/t/p/w1280/mu2NLRxP9u27wEMNcub61Alr8uY.jpg",
-      "duration": "long",
+      "duration": 120,
       "person": [
         "single",
         "couple"
@@ -870,7 +870,7 @@
       "title": "犬之島",
       "description": "奇幻停格動畫與政治寓言的完美結合",
       "image": "https://www.themoviedb.org/t/p/w1280/6o7cIPUwasrxJyt4ods79EbLRfd.jpg",
-      "duration": "medium",
+      "duration": 100,
       "person": [
         "group"
       ],
@@ -886,7 +886,7 @@
         {
           "id": "duration",
           "type": "range",
-          "value": "medium"
+          "value": "short"
         },
         {
           "id": "person",
@@ -931,7 +931,7 @@
       "title": "媽的多重宇宙",
       "description": "一場充滿混亂與感動的多重宇宙旅程",
       "image": "https://www.themoviedb.org/t/p/w1280/nXgDWQdULWjMoIAEUQg0reXeWL0.jpg",
-      "duration": "long",
+      "duration": 139,
       "person": [
         "couple",
         "group"
@@ -995,7 +995,7 @@
       "title": "小太陽的願望",
       "description": "一家人踏上充滿希望與笑淚的旅程",
       "image": "https://www.themoviedb.org/t/p/w1280/wKn7AJw730emlmzLSmJtzquwaeW.jpg",
-      "duration": "medium",
+      "duration": 102,
       "person": [
         "group"
       ],
@@ -1056,7 +1056,7 @@
       "title": "咒",
       "description": "台灣最恐怖的民俗驚悚片之一",
       "image": "https://www.themoviedb.org/t/p/w1280/fLA1yvDwH1JxiiJW0ObOxkrkusR.jpg",
-      "duration": "medium",
+      "duration": 111,
       "person": [
         "single",
         "group"
@@ -1119,7 +1119,7 @@
       "title": "放牛班的春天",
       "description": "感人至深的師生情誼與音樂啟蒙",
       "image": "https://www.themoviedb.org/t/p/w1280/yHMNLZAlH9q7sz9A5vcgYby9IGW.jpg",
-      "duration": "medium",
+      "duration": 96,
       "person": [
         "single",
         "group"
@@ -1136,7 +1136,7 @@
         {
           "id": "duration",
           "type": "range",
-          "value": "medium"
+          "value": "short"
         },
         {
           "id": "person",
@@ -1182,7 +1182,7 @@
       "title": "海邊的曼徹斯特",
       "description": "哀傷與救贖交錯的人生低谷",
       "image": "https://www.themoviedb.org/t/p/w1280/tZ3cAEoLRJp4ebVzIef7y8xzHlx.jpg",
-      "duration": "long",
+      "duration": 137,
       "person": [
         "single"
       ],
@@ -1243,7 +1243,7 @@
       "title": "我想有個家",
       "description": "敘利亞小男孩在戰火中求生的真實寫照",
       "image": "https://www.themoviedb.org/t/p/w1280/xbHrK3Xl0OaHUuDaPXZ8mnllgT4.jpg",
-      "duration": "long",
+      "duration": 137,
       "person": [
         "single"
       ],
@@ -1304,7 +1304,7 @@
       "title": "企鵝寶貝",
       "description": "記錄南極企鵝育兒的溫馨紀錄片",
       "image": "https://www.themoviedb.org/t/p/w1280/o9xJ1xG1WKlHkl8ACqq0LShOuMu.jpg",
-      "duration": "short",
+      "duration": 85,
       "person": [
         "group",
         "couple"
@@ -1367,7 +1367,7 @@
       "title": "布達佩斯大飯店",
       "description": "一場發生在虛構歐洲國度的幽默懸疑旅程",
       "image": "https://www.themoviedb.org/t/p/w1280/2OfmHuihnQs43CtoiPfy4bAIvBS.jpg",
-      "duration": "medium",
+      "duration": 105,
       "person": [
         "single",
         "group"
@@ -1430,7 +1430,7 @@
       "title": "玩具總動員3",
       "description": "玩具們面臨離別與新生活的感人冒險",
       "image": "https://www.themoviedb.org/t/p/w1280/zOpj9XcRHKiHzS3z9I7NdTFX48O.jpg",
-      "duration": "medium",
+      "duration": 103,
       "person": [
         "couple",
         "family"
@@ -1493,7 +1493,7 @@
       "title": "王牌冤家",
       "description": "一對戀人抹除彼此記憶後的奇幻愛情故事",
       "image": "https://www.themoviedb.org/t/p/w1280/a10t6Etv9cHz5pTNl9RyqspbdnY.jpg",
-      "duration": "medium",
+      "duration": 108,
       "person": [
         "single",
         "couple"

@@ -67,7 +67,7 @@ export default function RecommendBook() {
   const answers = state?.answers;
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
-  const [loading, setLoading] = useState(true);  
+  const [loading, setLoading] = useState(true);
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });//  Lightbox 
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export default function RecommendBook() {
           <h5 className="m-0">懶人書蟲的推薦系統</h5>
         </header>
 
-        <main className="flex-grow-1 py-3 mt-4">
+        <main className="flex-grow-1 py-3">
           <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
           <div className="row justify-content-center">
             {recommended.map((book, index) => (
@@ -165,8 +165,7 @@ export default function RecommendBook() {
                     <p className="card-text">{book.description}</p>
                     <ul className="list-unstyled small">
                       <li>作者：{book.author}</li>
-                      <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>
-                      <li>系列：{book.preference}</li>
+                      <li>類型：{book.genre} 、{book.mood?.join?.("、")}</li>                      
                       <li>語言：{book.language}</li>
                       <li>配對分數：<RatingStars score={book.score} /></li>
                     </ul>
@@ -216,7 +215,33 @@ export default function RecommendBook() {
           onClose={closeLightbox}
           onPrev={prevImage}
           onNext={nextImage}
-          showBadge={true}
+          showBadge
+          closeLabel="關閉" // 關閉按鈕文案也能改
+
+          // 圖片
+          srcResolver={(m) =>
+            /^https?:\/\//i.test(m.image) ? m.image : `${process.env.PUBLIC_URL}/${m.image}`
+          }
+          altResolver={(m) => m.title}
+
+
+
+          // 這裡決定要顯示哪些欄位 + 每個欄位的「文字」
+          metaResolver={(m) => [
+            m.author && { label: "作者：", value: m.author },
+            m.rating && { label: "", value: m.rating },    
+            m.preference && { label: "", value: m.preference },
+                               
+          ].filter(Boolean)}
+
+          // 這裡決定「搜尋片源」按鈕（文案可改）
+          actionsResolver={(m) => [
+            {
+              label: "搜尋通路", // 想換成「哪裡看」、「Watch」都可以
+              variant: "primary",
+              href: `https://www.google.com/search?q=${encodeURIComponent(m.title + " 購買")}`,
+            },
+          ]}
         />
 
 

@@ -9,70 +9,113 @@ export default function Lightbox({
   onPrev,
   onNext,
   showBadge = false,
-  srcResolver,      
-  altResolver 
+
+  // 圖片
+  srcResolver,
+  altResolver,
+
+  // 內容（父層全權決定要顯示哪些欄位與文案）
+  metaResolver,    // (item) => [{ label, value }]
+  actionsResolver, // (item, index) => [{ label, href?, onClick?, variant? }]
+
+  // 文案
+  closeLabel = "關閉",
 }) {
-  // 鍵盤事件
   useEffect(() => {
     if (!isOpen) return;
-    const handleKey = (e) => {
+    const onKey = (e) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") onPrev();
       if (e.key === "ArrowRight") onNext();
     };
-    window.addEventListener("keydown", handleKey);
+    window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose, onPrev, onNext]);
 
   if (!isOpen || !images[index]) return null;
+  const item = images[index];
 
-  const current = images[index];
-
-   const src = srcResolver
-    ? srcResolver(current)
-    : current.image || current.src;
-
-    const alt = altResolver
-  ? altResolver(current)
-  : (current.title || "");
- 
+  const src = srcResolver ? srcResolver(item) : item.image || item.src;
+  const alt = altResolver ? altResolver(item) : (item.title || "");
+  const meta = metaResolver ? metaResolver(item) : [];
+  const actions = actionsResolver ? actionsResolver(item, index) : [];
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" onClick={onClose}>
+    <div className="lightbox" role="dialog" aria-modal="true" >
       <button
         className="lightbox-btn lightbox-prev"
         aria-label="上一張"
         onClick={(e) => { e.stopPropagation(); onPrev(); }}
-      >
-        ‹
-      </button>
+      >‹</button>
 
       <div className="lightbox-img-wrapper" onClick={(e) => e.stopPropagation()}>
-        {showBadge && (
-          <div className="lightbox-badge">No.{index + 1}</div>
-        )}
+        {showBadge && <div className="lightbox-badge">No.{index + 1}</div>}
+
         <img src={src} alt={alt} className="lightbox-img" />
+
+ 
+        {/* 只保留覆蓋在底部的資訊框 */}
+        <div className="lightbox-info overlay" onClick={(e) => e.stopPropagation()}>
+                 {item.title && (
+  <h6 className="lightbox-title mb-2 fw-bold">{item.title}</h6>
+)}
+
+          {Array.isArray(meta) && meta.length > 0 && (
+            <ul className="lightbox-meta list-unstyled d-flex flex-wrap gap-2 mb-2">
+              {meta.map(({ label, value }, i) => (
+                <li key={i} className="lightbox-meta__chip">
+                  <span className="lightbox-meta__label">{label}</span>
+                  <span className="lightbox-meta__value">{value}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className="d-flex justify-content-end gap-2 flex-wrap">
+            {actions.map((a, i) =>
+              a.href ? (
+                <a
+                  key={i}
+                  className={`btn ${a.variant === "secondary" ? "btn-outline-light" : "btn-danger"}`}
+                  href={a.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {a.label}
+                </a>
+              ) : (
+                <button
+                  key={i}
+                  className={`btn ${a.variant === "secondary" ? "btn-outline-light" : "btn-danger"}`}
+                  onClick={(e) => { e.stopPropagation(); a.onClick?.(item, index); }}
+                >
+                  {a.label}
+                </button>
+              )
+            )}
+            <button className="btn btn-outline-light" onClick={(e) => { e.stopPropagation(); onClose(); }}>
+              {closeLabel}
+            </button>
+          </div>
+        </div>
       </div>
 
       <button
         className="lightbox-btn lightbox-next"
         aria-label="下一張"
         onClick={(e) => { e.stopPropagation(); onNext(); }}
-      >
-        ›
-      </button>
+      >›</button>
 
       <button
         className="lightbox-close"
         aria-label="關閉"
         onClick={(e) => { e.stopPropagation(); onClose(); }}
-      >
-        ×
-      </button>
+      >×</button>
     </div>
   );
 }

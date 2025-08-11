@@ -10,7 +10,7 @@ import Lightbox from "./component/Lightbox";
 function rangeHandler(item, answers) {
   const userValue = answers[item.id];
   const classifyDuration = (minutes) => {
-    if (minutes <= 60) return 'short';
+    if (minutes <= 100) return 'short';
     if (minutes <= 120) return 'medium';
     return 'long';
   };
@@ -118,7 +118,7 @@ export default function RecommendMovie() {
             <h5 className="m-0">懶惰影迷的選片推薦系統</h5>
           </header>
 
-          <main className="flex-grow-1 py-3 mt-4">
+          <main className="flex-grow-1 py-3">
             <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
 
             <div className="row justify-content-center">
@@ -195,6 +195,7 @@ export default function RecommendMovie() {
           </footer>
 
           {/* ===== Lightbox Overlay ===== */}
+
           <Lightbox
             isOpen={lightbox.open}
             images={recommended}
@@ -202,9 +203,33 @@ export default function RecommendMovie() {
             onClose={closeLightbox}
             onPrev={prevImage}
             onNext={nextImage}
-            showBadge={true}
-            srcResolver={(item) => `${process.env.PUBLIC_URL}${item.image}`}
+            showBadge
+            closeLabel="關閉" // 關閉按鈕文案也能改
+
+            // 圖片
+            srcResolver={(m) =>
+              /^https?:\/\//i.test(m.image) ? m.image : `${process.env.PUBLIC_URL}/${m.image}`
+            }
+            altResolver={(m) => m.title}
+
+            // 這裡決定要顯示哪些欄位 + 每個欄位的「文字」
+            metaResolver={(m) => [
+              m.language && { label: "", value: m.language },
+              m.duration && { label: "片長", value: `：${m.duration} 分鐘` },          // 建議在資料裡新增 runtime（分鐘）
+              m.genres?.length && { label: "", value: m.genres.join("、") },
+            ].filter(Boolean)}
+
+            // 這裡決定「搜尋片源」按鈕（文案可改）
+            actionsResolver={(m) => [
+              {
+                label: "搜尋片源", // 想換成「哪裡看」、「Watch」都可以
+                variant: "primary",
+                href: `https://www.google.com/search?q=${encodeURIComponent(m.title + " 線上看")}`,
+              },
+            ]}
           />
+
+
         </div>
       )}
     </>

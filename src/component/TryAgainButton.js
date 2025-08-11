@@ -37,7 +37,7 @@ export default function TryAgainButton({
 
   return (
     <button
-      className={`btn w-100 text-center mt-4 fs-6 fw-bold ${textColor}`}
+      className={`btn w-100 text-center mt-4 fs-6 fw-bold share-btn ${textColor}`}
       style={{ backgroundColor: buttonColor }}
       onClick={handleClick}
     >

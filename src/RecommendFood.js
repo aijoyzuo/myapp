@@ -131,7 +131,7 @@ export default function RecommendFood() {
           <header className="text-center py-3 shadow-sm fixed-top" style={{ backgroundColor: '#f6da85' }}>
             <h5 className="m-0">懶惰吃貨的飲食推薦系統</h5>
           </header>
-          <main className="flex-grow-1 py-3 mt-4">
+          <main className="flex-grow-1 py-3">
             <h2 className="text-center mb-4">根據你的選擇，我們推薦：</h2>
             <div className="row">
               {recommended.map((food, index) => (
@@ -140,7 +140,7 @@ export default function RecommendFood() {
                     <div className="position-absolute top-0 start-0 text-white px-2 py-1 fw-bold rounded-end" style={{ backgroundColor: 'rgba(255, 193, 7, 0.7)' }}>
                       <i className="bi bi-award-fill me-1" />No.{index + 1}
                     </div>
-                   
+
 
                     {/*  圖片可點開燈箱 */}
                     <img
@@ -200,6 +200,8 @@ export default function RecommendFood() {
           </footer>
 
           {/* ===== Lightbox Overlay ===== */}
+
+
           <Lightbox
             isOpen={lightbox.open}
             images={recommended}
@@ -207,8 +209,31 @@ export default function RecommendFood() {
             onClose={closeLightbox}
             onPrev={prevImage}
             onNext={nextImage}
-            showBadge={true}
-            srcResolver={(item) => `${process.env.PUBLIC_URL}${item.image}`}
+            showBadge
+            closeLabel="關閉" // 關閉按鈕文案也能改
+
+            // 圖片
+            srcResolver={(m) =>
+              /^https?:\/\//i.test(m.image) ? m.image : `${process.env.PUBLIC_URL}/${m.image}`
+            }
+            altResolver={(m) => m.title}
+
+            
+
+            // 這裡決定要顯示哪些欄位 + 每個欄位的「文字」
+            metaResolver={(m) => [
+              m.preference && { label: "", value: m.preference },
+              m.diet && { label: "", value: m.diet },          // 建議在資料裡新增 runtime（分鐘）              
+            ].filter(Boolean)}
+
+            // 這裡決定「搜尋片源」按鈕（文案可改）
+            actionsResolver={(m) => [
+              {
+                label: "搜尋餐廳", // 想換成「哪裡看」、「Watch」都可以
+                variant: "primary",
+                href: `https://www.google.com/search?q=${encodeURIComponent(m.title + " 推薦餐廳")}`,
+              },
+            ]}
           />
 
         </div >

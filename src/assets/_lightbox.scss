@@ -1,77 +1,109 @@
+/* 背景與置中 */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.85);
+  background: rgba(0, 0, 0, .8);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 11000;
-  cursor: zoom-out;
+  gap: 12px;
+  padding: 24px;
+  z-index: 2000;
+  overflow: hidden;
 }
 
+/* 外層：由圖片實際尺寸決定寬度；圓角與裁切在這裡做 */
 .lightbox-img-wrapper {
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 不再固定寬度，改用上限，讓 wrapper 依子元素（圖片）寬度縮放 */
+  max-width: min(720px, 92vw);
+
+  border-radius: 8px;
+  overflow: hidden; /* 讓 overlay 與圖片一起被裁切 */
 }
 
+/* 圖片：不強制 100% 寬，改用 max-*，配合 max-height 做等比縮放 */
 .lightbox-img {
-  max-width: 92vw;
-  max-height: 92vh;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 48px); /* 視窗高 - 上下 padding(24*2) */
   object-fit: contain;
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  cursor: default;
+  /* 圓角交給 wrapper，這裡不再設 */
 }
 
-.lightbox-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  padding: 4px 8px;
-  font-weight: bold;
+/* 共同外觀 */
+.lightbox-info {
+  background: rgba(0, 0, 0, .6);
   color: #fff;
-  background-color: rgba(202, 66, 49, 0.6);
-  border-radius: 0 6px 6px 0;
-  font-size: 14px;
-  pointer-events: none;
+  padding: 12px 14px;
+  backdrop-filter: saturate(140%) blur(2px);
 }
 
+/* 覆蓋在圖片底部，寬度與圖片（= wrapper）完全一致 */
+.lightbox-info.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+
+  max-height: 40vh;   /* 內容太多時在黑框內捲動 */
+  overflow: auto;
+
+  pointer-events: auto;
+  z-index: 2;
+
+  /* 與 wrapper 圓角對齊，只保留下緣 */
+  border-radius: 0 0 8px 8px;
+
+  /* 確保不被 margin/box model 撐出 */
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* 小籤樣式（可依喜好調整） */
+.lightbox-meta__chip {
+  background: rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.lightbox-meta__label { opacity: .85; }
+
+/* 導覽/關閉 & 徽章層級 */
+.lightbox-btn,
 .lightbox-close {
-  position: fixed;
-  top: 16px;
-  right: 20px;
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 50%;
-  font-size: 28px;
-  line-height: 1;
-  color: #fff;
-  background: rgba(255,255,255,.15);
-  cursor: pointer;
-}
-.lightbox-close:hover { background: rgba(255,255,255,.3); }
-
-.lightbox-btn {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 64px;
+  background: transparent;
   border: 0;
+  color: #fff;
   font-size: 40px;
   line-height: 1;
-  color: #fff;
-  background: rgba(255,255,255,.12);
   cursor: pointer;
   user-select: none;
+  z-index: 4;
 }
-.lightbox-btn:hover { background: rgba(255,255,255,.24); }
-
-.lightbox-prev { left: 18px; }
-.lightbox-next { right: 18px; }
-
-@media (max-width: 576px) {
-  .lightbox-btn { width: 40px; height: 56px; font-size: 34px; }
-  .lightbox-prev { left: 8px; }
-  .lightbox-next { right: 8px; }
+.lightbox-prev { left: 12px; }
+.lightbox-next { right: 12px; }
+.lightbox-close {
+  top: 12px;
+  right: 12px;
+  font-size: 32px;
+}
+.lightbox-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(202, 66, 49, .9);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 3;
 }
