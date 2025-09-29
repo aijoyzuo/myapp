@@ -91,7 +91,7 @@ body {
   font-size: 2rem;
 }
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 @media (min-width: 992px) {
   .title {
@@ -155,7 +155,7 @@ body {
 }
 
 .box {
-  width: min(85vw, 400px);
+  width: min(85vw, 450px);
   aspect-ratio: 1 / 1;
   /* 關鍵：固定 1:1 */
   position: relative;
