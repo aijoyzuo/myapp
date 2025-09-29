@@ -118,7 +118,11 @@ body {
   color: #fff;
   text-align: center;
 }
-
+@media (min-width: 992px) {
+  .page-head .title {
+    font-size: 26px; /* 調小字體 */
+  }
+}
 /* ====== 轉盤區（wheel） ====== */
 .wheel-page {
   //background-image:
@@ -146,7 +150,7 @@ body {
 }
 
 .box {
-  width: min(85vw, 360px);
+  width: min(85vw, 400px);
   aspect-ratio: 1 / 1;
   /* 關鍵：固定 1:1 */
   position: relative;
