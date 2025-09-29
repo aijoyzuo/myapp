@@ -127,22 +127,26 @@ body {
   background-size: cover;
   background-position: center;
   position: relative;
-  //overflow: hidden;
-  height: calc(100vh - 112px);
+  //overflow: hidden;//
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  //gap: 12px;//
   font-family: "Roboto Condensed";
+  box-sizing: border-box;
+  padding-top:0px;
 }
+
+
 
 .wheel-fadein {
   animation: floatIn 1s ease-out forwards;
 }
 
 .box {
-  width: min(92vw, 540px);
+  width: min(85vw, 470px);
   aspect-ratio: 1 / 1;
   /* 關鍵：固定 1:1 */
   position: relative;

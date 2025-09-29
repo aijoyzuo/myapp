@@ -14,7 +14,7 @@
   margin-top: 1rem; /* 與轉盤保持距離 */
 }
 
-.wheel {
+/*.wheel {
   position: relative;
   width: 300px;
   height: 300px;
@@ -27,6 +27,7 @@
       #cfc 120deg 240deg,
       #ccf 240deg 360deg);
 }
+
 
 .wheel-label {
   position: absolute;
@@ -50,13 +51,13 @@
 
 .label-1 {
   transform: rotate(180deg) translateY(-100px);
-  /* ✅ 修正為一致推外 */
+  
 }
 
 .label-2 {
   transform: rotate(300deg) translateY(-100px);
 }
-
+*/
 .start-btn {
   margin-top: 1.5rem;
   padding: 1rem 2rem;
