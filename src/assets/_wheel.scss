@@ -88,12 +88,21 @@ body {
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
-
 .subtitle {
   font-size: 1.5rem;
 }
+@media (min-width: 992px) {
+  .title {
+    font-size: 1.5rem; /* 調小字體 */
+  }
+  .subtitle {
+    font-size: 1rem; /* 調小字體 */
+  }
+}
+
+
 
 .info {
   color: var(--darkBlue);
@@ -118,11 +127,7 @@ body {
   color: #fff;
   text-align: center;
 }
-@media (min-width: 992px) {
-  .page-head .title {
-    font-size: 26px; /* 調小字體 */
-  }
-}
+
 /* ====== 轉盤區（wheel） ====== */
 .wheel-page {
   //background-image:
