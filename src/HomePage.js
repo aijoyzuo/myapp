@@ -57,12 +57,12 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="py-0 py-md-2">
+      <div className="py-0 py-md-4">
         <header className="text-center py-2 shadow-sm fixed-top" style={{ color:'var(--darkBlue)',backgroundColor: 'var(--pink-alpha)' }}>
           <h1 className="title mb-0">懶人救星</h1>
         </header>
         <div className="wheel-page">
-          <div className="info text-center p-4 mb-3 mt-0 mt-md-1">
+          <div className="info text-center p-4 mb-3 mt-0 mt-md-4">
             <p className="mb-1">懶人今天怎麼過</p>
             <p className="mb-0">試試給懶人的活動推薦系統！</p>
           </div>
